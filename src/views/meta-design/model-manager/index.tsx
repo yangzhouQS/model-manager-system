@@ -5,16 +5,33 @@ import type { ModelFormData } from './ModelFormDialog'
 import { createEmptyModelForm } from './ModelFormDialog'
 import './index.less'
 
-/** 模型数据项 */
+/** 模型数据项（表格展示用） */
 interface ModelItem {
   id: string
   name: string
-  code: string
-  tableName: string
-  description: string
-  status: '0' | '1'
+  displayName: string
+  module: string
+  namespace: string
+  pageStyle: string
+  entityStructure: string
+  features: string[]
   createTime: string
   updateTime: string
+}
+
+/** 页面样式中文映射 */
+const pageStyleMap: Record<string, string> = {
+  'row-edit': '行编辑页面',
+  'master-detail': '主从页面',
+  'tree-table': '树表页面',
+  'tree-card': '树卡页面',
+}
+
+/** 实体结构中文映射 */
+const entityStructureMap: Record<string, string> = {
+  single: '单主结构',
+  'master-child': '主子结构',
+  'master-child-grandchild': '主子孙结构',
 }
 
 export default defineComponent({
@@ -22,45 +39,50 @@ export default defineComponent({
   setup() {
     const loading = ref(false)
     const dialogVisible = ref(false)
-    const dialogTitle = ref('新增模型')
+    const dialogTitle = ref('快速向导')
     const currentModelData = ref<ModelFormData>(createEmptyModelForm())
 
     const queryParams = reactive({
       name: '',
-      code: '',
-      status: '',
+      displayName: '',
     })
 
     const tableData = ref<ModelItem[]>([
       {
         id: '1',
-        name: '用户模型',
-        code: 'user_model',
-        tableName: 'sys_user',
-        description: '系统用户数据模型',
-        status: '1',
+        name: 'receive_demo',
+        displayName: '测试名称',
+        module: '数据应用基础',
+        namespace: 'nsdemo',
+        pageStyle: 'row-edit',
+        entityStructure: 'single',
+        features: [],
         createTime: '2026-01-01 00:00:00',
         updateTime: '2026-01-01 00:00:00',
       },
       {
         id: '2',
-        name: '角色模型',
-        code: 'role_model',
-        tableName: 'sys_role',
-        description: '系统角色数据模型',
-        status: '1',
-        createTime: '2026-01-02 00:00:00',
-        updateTime: '2026-01-02 00:00:00',
+        name: 'user_model',
+        displayName: '用户模型',
+        module: '系统管理',
+        namespace: 'system',
+        pageStyle: 'master-detail',
+        entityStructure: 'master-child',
+        features: ['approval'],
+        createTime: '2026-02-01 00:00:00',
+        updateTime: '2026-02-01 00:00:00',
       },
       {
         id: '3',
-        name: '菜单模型',
-        code: 'menu_model',
-        tableName: 'sys_menu',
-        description: '系统菜单数据模型',
-        status: '0',
-        createTime: '2026-01-03 00:00:00',
-        updateTime: '2026-01-03 00:00:00',
+        name: 'order_model',
+        displayName: '订单模型',
+        module: '业务管理',
+        namespace: 'business',
+        pageStyle: 'tree-table',
+        entityStructure: 'master-child-grandchild',
+        features: ['document', 'business-flow'],
+        createTime: '2026-03-01 00:00:00',
+        updateTime: '2026-03-01 00:00:00',
       },
     ])
 
@@ -76,35 +98,36 @@ export default defineComponent({
     /** 重置 */
     function handleReset() {
       queryParams.name = ''
-      queryParams.code = ''
-      queryParams.status = ''
+      queryParams.displayName = ''
       handleQuery()
     }
 
     /** 新增 */
     function handleAdd() {
-      dialogTitle.value = '新增模型'
+      dialogTitle.value = '快速向导'
       currentModelData.value = createEmptyModelForm()
       dialogVisible.value = true
     }
 
     /** 编辑 */
     function handleEdit(row: ModelItem) {
-      dialogTitle.value = '编辑模型'
+      dialogTitle.value = '快速向导'
       currentModelData.value = {
         id: row.id,
         name: row.name,
-        code: row.code,
-        tableName: row.tableName,
-        description: row.description,
-        status: row.status,
+        displayName: row.displayName,
+        module: row.module,
+        namespace: row.namespace,
+        pageStyle: row.pageStyle as ModelFormData['pageStyle'],
+        entityStructure: row.entityStructure as ModelFormData['entityStructure'],
+        features: [...row.features] as ModelFormData['features'],
       }
       dialogVisible.value = true
     }
 
     /** 删除 */
     function handleDelete(row: ModelItem) {
-      ElMessageBox.confirm(`确认删除模型「${row.name}」吗？`, '提示', {
+      ElMessageBox.confirm(`确认删除模型「${row.displayName}」吗？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
@@ -126,7 +149,13 @@ export default defineComponent({
         if (index !== -1) {
           tableData.value[index] = {
             ...tableData.value[index],
-            ...formData,
+            name: formData.name,
+            displayName: formData.displayName,
+            module: formData.module,
+            namespace: formData.namespace,
+            pageStyle: formData.pageStyle,
+            entityStructure: formData.entityStructure,
+            features: [...formData.features],
             updateTime: new Date().toLocaleString(),
           }
         }
@@ -134,8 +163,14 @@ export default defineComponent({
       } else {
         // 新增模式：添加新数据
         tableData.value.push({
-          ...formData,
           id: String(Date.now()),
+          name: formData.name,
+          displayName: formData.displayName,
+          module: formData.module,
+          namespace: formData.namespace,
+          pageStyle: formData.pageStyle,
+          entityStructure: formData.entityStructure,
+          features: [...formData.features],
           createTime: new Date().toLocaleString(),
           updateTime: new Date().toLocaleString(),
         })
@@ -155,23 +190,12 @@ export default defineComponent({
                 clearable
               />
             </el-form-item>
-            <el-form-item label="模型编码">
+            <el-form-item label="显示名称">
               <el-input
-                v-model={queryParams.code}
-                placeholder="请输入模型编码"
+                v-model={queryParams.displayName}
+                placeholder="请输入显示名称"
                 clearable
               />
-            </el-form-item>
-            <el-form-item label="状态">
-              <el-select
-                v-model={queryParams.status}
-                placeholder="请选择状态"
-                style={{ width: '200px' }}
-                clearable
-              >
-                <el-option label="启用" value="1" />
-                <el-option label="禁用" value="0" />
-              </el-select>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" onClick={handleQuery}>
@@ -201,21 +225,21 @@ export default defineComponent({
                 stripe
                 style={{ width: '100%' }}
               >
-                <el-table-column prop="name" label="模型名称" min-width={120} />
-                <el-table-column prop="code" label="模型编码" min-width={140} />
-                <el-table-column prop="tableName" label="关联表名" min-width={140} />
-                <el-table-column
-                  prop="description"
-                  label="描述"
-                  min-width={180}
-                  show-overflow-tooltip
-                />
-                <el-table-column prop="status" label="状态" width={100} align="center">
+                <el-table-column prop="displayName" label="显示名称" min-width={120} />
+                <el-table-column prop="name" label="模型名称" min-width={140} />
+                <el-table-column prop="module" label="所属模块" min-width={120} />
+                <el-table-column prop="namespace" label="名称空间" min-width={100} />
+                <el-table-column prop="pageStyle" label="页面样式" width={120} align="center">
                   {{
                     default: ({ row }: { row: ModelItem }) => (
-                      <el-tag type={row.status === '1' ? 'success' : 'danger'}>
-                        {row.status === '1' ? '启用' : '禁用'}
-                      </el-tag>
+                      <el-tag>{pageStyleMap[row.pageStyle] || row.pageStyle}</el-tag>
+                    ),
+                  }}
+                </el-table-column>
+                <el-table-column prop="entityStructure" label="实体结构" width={120} align="center">
+                  {{
+                    default: ({ row }: { row: ModelItem }) => (
+                      <span>{entityStructureMap[row.entityStructure] || row.entityStructure}</span>
                     ),
                   }}
                 </el-table-column>

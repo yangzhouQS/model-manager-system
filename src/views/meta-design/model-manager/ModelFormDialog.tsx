@@ -1,16 +1,47 @@
-import { defineComponent, reactive, watch } from 'vue'
+import { defineComponent, reactive, watch, computed } from 'vue'
 import type { PropType } from 'vue'
 import { ElMessage } from 'element-plus'
 import './ModelFormDialog.less'
 
+// 导入页面样式缩略图
+import rowEditImg from '../images/行编辑页面.png'
+import masterDetailImg from '../images/主从页面.png'
+import treeTableImg from '../images/树表页面.png'
+import treeCardImg from '../images/树卡页面.png'
+
+/** 页面样式选项 */
+export type PageStyle = 'row-edit' | 'master-detail' | 'tree-table' | 'tree-card'
+
+/** 实体结构选项 */
+export type EntityStructure = 'single' | 'master-child' | 'master-child-grandchild'
+
+/** 元数据特性选项 */
+export type MetadataFeature =
+  | 'tree'
+  | 'archive'
+  | 'document'
+  | 'approval'
+  | 'business-flow'
+  | 'pull-order'
+  | 'cloud-native'
+
 /** 模型表单数据 */
 export interface ModelFormData {
   id: string
+  /** 名称 */
   name: string
-  code: string
-  tableName: string
-  description: string
-  status: '0' | '1'
+  /** 显示名称 */
+  displayName: string
+  /** 所属模块 */
+  module: string
+  /** 名称空间 */
+  namespace: string
+  /** 页面样式 */
+  pageStyle: PageStyle
+  /** 实体结构 */
+  entityStructure: EntityStructure
+  /** 元数据特性列表 */
+  features: MetadataFeature[]
 }
 
 /** 创建空的表单数据 */
@@ -18,12 +49,40 @@ export function createEmptyModelForm(): ModelFormData {
   return {
     id: '',
     name: '',
-    code: '',
-    tableName: '',
-    description: '',
-    status: '1',
+    displayName: '',
+    module: '',
+    namespace: '',
+    pageStyle: 'row-edit',
+    entityStructure: 'single',
+    features: [],
   }
 }
+
+/** 页面样式选项配置 */
+const pageStyleOptions: { value: PageStyle; label: string; image: string }[] = [
+  { value: 'row-edit', label: '行编辑页面', image: rowEditImg },
+  { value: 'master-detail', label: '主从页面', image: masterDetailImg },
+  { value: 'tree-table', label: '树表页面', image: treeTableImg },
+  { value: 'tree-card', label: '树卡页面', image: treeCardImg },
+]
+
+/** 实体结构选项配置 */
+const entityStructureOptions: { value: EntityStructure; label: string; tag: string }[] = [
+  { value: 'single', label: '单主结构元数据', tag: '一主' },
+  { value: 'master-child', label: '主子结构元数据', tag: '一主 子' },
+  { value: 'master-child-grandchild', label: '主子孙结构元数据', tag: '一主 子 孙' },
+]
+
+/** 元数据特性选项配置 */
+const featureOptions: { value: MetadataFeature; label: string }[] = [
+  { value: 'tree', label: '树结构特性' },
+  { value: 'archive', label: '档案特性' },
+  { value: 'document', label: '单据特性' },
+  { value: 'approval', label: '审批流特性' },
+  { value: 'business-flow', label: '业务流特性' },
+  { value: 'pull-order', label: '拉单特性' },
+  { value: 'cloud-native', label: '云原生特性' },
+]
 
 const ModelFormDialog = defineComponent({
   name: 'ModelFormDialog',
@@ -36,7 +95,7 @@ const ModelFormDialog = defineComponent({
     /** 弹窗标题 */
     title: {
       type: String as PropType<string>,
-      default: '新增模型',
+      default: '快速向导',
     },
     /** 表单数据（编辑时传入已有数据） */
     modelData: {
@@ -57,7 +116,11 @@ const ModelFormDialog = defineComponent({
     watch(
       () => props.modelData,
       (newVal) => {
-        Object.assign(formModel, newVal)
+        Object.assign(formModel, {
+          ...createEmptyModelForm(),
+          ...newVal,
+          features: [...(newVal.features || [])],
+        })
       },
       { immediate: true, deep: true },
     )
@@ -72,17 +135,39 @@ const ModelFormDialog = defineComponent({
       },
     )
 
+    /** 切换元数据特性 */
+    function toggleFeature(feature: MetadataFeature) {
+      const idx = formModel.features.indexOf(feature)
+      if (idx === -1) {
+        formModel.features.push(feature)
+      } else {
+        formModel.features.splice(idx, 1)
+      }
+    }
+
+    /** 预览区显示名称 */
+    const previewDisplayName = computed(() => formModel.displayName || '测试名称')
+    const previewName = computed(() => formModel.name || 'receive_demo')
+
     /** 表单校验并提交 */
     function handleSubmit() {
       if (!formModel.name.trim()) {
-        ElMessage.warning('请输入模型名称')
+        ElMessage.warning('请输入名称')
         return
       }
-      if (!formModel.code.trim()) {
-        ElMessage.warning('请输入模型编码')
+      if (!formModel.displayName.trim()) {
+        ElMessage.warning('请输入显示名称')
         return
       }
-      emit('submit', { ...formModel })
+      if (!formModel.module.trim()) {
+        ElMessage.warning('请输入所属模块')
+        return
+      }
+      if (!formModel.namespace.trim()) {
+        ElMessage.warning('请输入名称空间')
+        return
+      }
+      emit('submit', { ...formModel, features: [...formModel.features] })
       handleClose()
     }
 
@@ -95,59 +180,174 @@ const ModelFormDialog = defineComponent({
       <el-dialog
         modelValue={props.visible}
         title={props.title}
-        width="600px"
+        width="960px"
         destroy-on-close
         onClose={handleClose}
+        class="model-form-dialog"
       >
-        <el-form label-width="100px" class="model-form">
-          <el-form-item label="模型名称" required>
-            <el-input
-              v-model={formModel.name}
-              placeholder="请输入模型名称"
-              maxlength={50}
-              show-word-limit
-            />
-          </el-form-item>
-          <el-form-item label="模型编码" required>
-            <el-input
-              v-model={formModel.code}
-              placeholder="请输入模型编码（英文+下划线）"
-              maxlength={100}
-              show-word-limit
-              disabled={!!props.modelData?.id}
-            />
-          </el-form-item>
-          <el-form-item label="关联表名">
-            <el-input
-              v-model={formModel.tableName}
-              placeholder="请输入关联数据库表名"
-              maxlength={100}
-              show-word-limit
-            />
-          </el-form-item>
-          <el-form-item label="描述">
-            <el-input
-              v-model={formModel.description}
-              type="textarea"
-              rows={3}
-              placeholder="请输入模型描述"
-              maxlength={200}
-              show-word-limit
-            />
-          </el-form-item>
-          <el-form-item label="状态">
-            <el-radio-group v-model={formModel.status}>
-              <el-radio value="1">启用</el-radio>
-              <el-radio value="0">禁用</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </el-form>
+        <div class="model-form-layout">
+          {/* ========== 左侧预览区 ========== */}
+          <div class="model-form-layout__preview">
+            {/* 顶部标签栏 */}
+            <div class="preview-tags">
+              <span class="preview-tag preview-tag--draft">未发布</span>
+              <span class="preview-tag preview-tag--bmf">BMF</span>
+            </div>
+
+            {/* 预览卡片 */}
+            <div class="preview-card">
+              <div class="preview-card__icon">
+                <span class="preview-card__icon-text">测</span>
+              </div>
+              <div class="preview-card__title">
+                <span class="preview-card__display-name">{previewDisplayName.value}</span>
+                <span class="preview-card__name">({previewName.value})</span>
+              </div>
+
+              <div class="preview-card__attrs">
+                <div class="preview-attr">
+                  <span class="preview-attr__label">所属模块：</span>
+                  <span class="preview-attr__value">{formModel.module || '数据应用基础'}</span>
+                </div>
+                <div class="preview-attr">
+                  <span class="preview-attr__label">名称空间：</span>
+                  <span class="preview-attr__value">{formModel.namespace || 'nsdemo'}</span>
+                </div>
+                <div class="preview-attr">
+                  <span class="preview-attr__label">层级：</span>
+                  <span class="preview-attr__value">领域级(0)</span>
+                </div>
+                <div class="preview-attr">
+                  <span class="preview-attr__label">行业：</span>
+                  <span class="preview-attr__value">综合控股集团(0)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ========== 右侧表单区 ========== */}
+          <div class="model-form-layout__form">
+            {/* 分组1：基础信息 */}
+            <div class="form-section">
+              <div class="form-section__title">基础信息</div>
+              <el-form label-width="100px" class="form-section__body">
+                <el-form-item label="名称" required>
+                  <el-input
+                    v-model={formModel.name}
+                    placeholder="请输入名称，如 receive_demo"
+                    maxlength={100}
+                  />
+                </el-form-item>
+                <el-form-item label="显示名称" required>
+                  <el-input
+                    v-model={formModel.displayName}
+                    placeholder="请输入显示名称"
+                    maxlength={50}
+                  />
+                </el-form-item>
+                <el-form-item label="所属模块" required>
+                  <el-input
+                    v-model={formModel.module}
+                    placeholder="请输入或选择所属模块"
+                    maxlength={100}
+                  >
+                    {{
+                      suffix: () => <el-icon class="el-input__icon"><span>🔍</span></el-icon>,
+                    }}
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="名称空间" required>
+                  <el-input
+                    v-model={formModel.namespace}
+                    placeholder="请输入名称空间"
+                    maxlength={100}
+                  />
+                </el-form-item>
+              </el-form>
+            </div>
+
+            {/* 分组2：页面样式 */}
+            <div class="form-section">
+              <div class="form-section__title">页面样式</div>
+              <div class="form-section__body">
+                <div class="page-style-group">
+                  {pageStyleOptions.map((opt) => (
+                    <div
+                      key={opt.value}
+                      class={[
+                        'page-style-item',
+                        formModel.pageStyle === opt.value && 'page-style-item--active',
+                      ]}
+                      onClick={() => (formModel.pageStyle = opt.value)}
+                    >
+                      <div class="page-style-item__thumb">
+                        <img
+                          src={opt.image}
+                          alt={opt.label}
+                          class="page-style-item__image"
+                        />
+                      </div>
+                      <div class="page-style-item__label">{opt.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* 分组3：实体信息设置 */}
+            <div class="form-section">
+              <div class="form-section__title">实体信息设置</div>
+              <div class="form-section__body">
+                <el-radio-group v-model={formModel.entityStructure} class="entity-structure-group">
+                  {entityStructureOptions.map((opt) => (
+                    <div
+                      key={opt.value}
+                      class={[
+                        'entity-structure-item',
+                        formModel.entityStructure === opt.value && 'entity-structure-item--active',
+                      ]}
+                      onClick={() => (formModel.entityStructure = opt.value)}
+                    >
+                      <el-radio value={opt.value}>
+                        <span class="entity-structure-item__label">{opt.label}</span>
+                        <span class="entity-structure-item__tag">【{opt.tag}】</span>
+                      </el-radio>
+                    </div>
+                  ))}
+                </el-radio-group>
+              </div>
+            </div>
+
+            {/* 分组4：元数据特性设置 */}
+            <div class="form-section">
+              <div class="form-section__title">元数据特性设置</div>
+              <div class="form-section__body">
+                <div class="feature-group">
+                  {featureOptions.map((opt) => (
+                    <div
+                      key={opt.value}
+                      class={[
+                        'feature-item',
+                        formModel.features.includes(opt.value) && 'feature-item--active',
+                      ]}
+                      onClick={() => toggleFeature(opt.value)}
+                    >
+                      {opt.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 底部按钮 */}
         {{
           footer: () => (
             <div class="dialog-footer">
               <el-button onClick={handleClose}>取消</el-button>
               <el-button type="primary" onClick={handleSubmit}>
-                确定
+                确定并设计
               </el-button>
             </div>
           ),
