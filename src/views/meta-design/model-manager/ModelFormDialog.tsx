@@ -333,7 +333,7 @@ const ModelFormDialog = defineComponent({
                 {/* 预览卡片 */}
                 <div class="preview-card">
                   <div class="preview-card__icon">
-                    <span class="preview-card__icon-text">测</span>
+                    <span class="preview-card__icon-text">{formModel.displayName?.charAt(0) || '显'}</span>
                   </div>
                   <div class="preview-card__title">
                     <span class="preview-card__display-name">{previewDisplayName.value}</span>
