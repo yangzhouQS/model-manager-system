@@ -10650,5 +10650,7578 @@ export const tableFieldsConfig = [
 		]
 	},
 
-
+	{
+		dbName: 'global_ma',
+		tables: [
+			{
+				"name": "mDeliverySummary",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码主键"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 609531394904064,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1919995388604928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"orgName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "张梓浈专用",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织机构名称"
+					},
+					"orderDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-11",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "单据日期"
+					},
+					"orderCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "发料汇总-20241100001",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "处理编号"
+					},
+					"recordedDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-11-14",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "账期日"
+					},
+					"serviceType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 10,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "业务类型（新增） 发料（10） 内调（20） 外调（30） 报废 （40） 发退（-11） 内退（-21） 外退（-31）"
+					},
+					"orderType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "操作类型默认值  -1冲红（不考虑预点） 2补录 4正常"
+					},
+					"labourName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "用料单位名称"
+					},
+					"labourId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "用料单位Id"
+					},
+					"isDeduct": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否扣款"
+					},
+					"bookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 8891.53,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "核算金额"
+					},
+					"lssueSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 8891.53,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发料金额"
+					},
+					"difference": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "差额"
+					},
+					"financialCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "机构ID（财务编码）"
+					},
+					"settlementAmount": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "本次发出金额"
+					},
+					"accSettlementAmount": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "开累发出金额"
+					},
+					"isPush": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否业务推送"
+					},
+					"isSubmit": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否提交"
+					},
+					"submitor": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "提交人"
+					},
+					"submitDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "提交时间"
+					},
+					"approvedState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "审批状态"
+					},
+					"approvedNumber": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "审批记录值"
+					},
+					"maker": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单人"
+					},
+					"makerDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-11-20 15:13:51",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单时间"
+					},
+					"oriOrgId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "机构对接"
+					},
+					"oriLabourId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "机构对接"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 586973516591616,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "张梓浈",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-11-14T14:40:52.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 591107012792320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-11-20T07:14:01.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1924022480654848,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "版本"
+					},
+					"isPushed": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否给财务推送"
+					},
+					"pushedNum": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "推送次数"
+					},
+					"errMsg": {
+						"type": null,
+						"rawType": "TEXT",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "推送错误信息"
+					},
+					"isProductionOrg": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否生产组织发料"
+					},
+					"printTimes": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "打印次数"
+					},
+					"btypeId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "往来单位id"
+					},
+					"btypeName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "往来单位名称"
+					},
+					"oriBtypeId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "三方往来单位id"
+					},
+					"btypeRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "往来单位修改备注"
+					},
+					"financeOrgId": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "财务组织id"
+					},
+					"financeOrgName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "财务组织名称"
+					},
+					"financeProjectId": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "财务项目id"
+					},
+					"financeProjectName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "财务项目名称"
+					},
+					"detailPushState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "详情推送状态"
+					}
+				}
+			},
+			{
+				"name": "mDeliverySummaryItem",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码主键"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 609531394904064,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1919995389039104,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"orderId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1919995388604928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主表主键"
+					},
+					"deliveryOrderId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1830635117367808,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发料单id"
+					},
+					"deliveryOrderCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "发料-20240700007",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发料单编号"
+					},
+					"deliveryMaker": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单人"
+					},
+					"deliveryMakerDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-07-11 16:36:54",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单日期"
+					},
+					"deliveryRecorderDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-07-11 16:36:39",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "出库时间"
+					},
+					"bookPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "核算价"
+					},
+					"bookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 3156.61,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "核算金额"
+					},
+					"lssuePrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发料价"
+					},
+					"lssueSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 3156.61,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发料金额"
+					},
+					"difference": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "差额"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 586973516591616,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "张梓浈",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-11-14T14:40:52.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 591107012792320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-11-20T07:14:01.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1924022480212480,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "版本"
+					},
+					"sortCode": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "排序"
+					},
+					"itemRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"materialType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "发料",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料类型"
+					},
+					"orgName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "张梓浈专用",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "项目名称"
+					},
+					"labourId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1745151726417408,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "用料单位id"
+					},
+					"labourName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "宿州市得亿商贸有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "用料单位名称"
+					},
+					"ghId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1390236544242688,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "工号单位id"
+					},
+					"ghName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "太行一号旅游公路武乡县砖壁至太行龙洞至板山段",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "工号单位名称"
+					},
+					"deliveryAuditor": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "提交人"
+					},
+					"deliveryAuditDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-07-11 16:36:56",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "提交时间"
+					},
+					"btypeId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "往来单位id"
+					},
+					"btypeName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "往来单位名称"
+					},
+					"oriBtypeId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "三方往来单位id"
+					},
+					"serviceType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "业务类型"
+					},
+					"orderType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "操作类型"
+					}
+				}
+			},
+			{
+				"name": "mInventory",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 587089923772928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1992048415872512,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"storeId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "来源ID"
+					},
+					"supplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": "宿州市得亿商贸有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商名称"
+					},
+					"supplierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1745151726417408,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商Id"
+					},
+					"orderDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2025-02-24 17:52:31",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "入账时间"
+					},
+					"materialId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1032293216753664,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "主材主键"
+					},
+					"materialCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "00002",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料编码"
+					},
+					"materialName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "预拌混凝土",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料名称"
+					},
+					"materialModel": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "C15",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "规格型号"
+					},
+					"materialUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "吨",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "主单位"
+					},
+					"quantity": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 878.963,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "数量"
+					},
+					"useQuantity": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "已发数量"
+					},
+					"bookPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": 3858.40707965,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "账面价"
+					},
+					"bookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 3391397.06,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "账面金额"
+					},
+					"useBookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "已发账面金额"
+					},
+					"itemBarCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "WZ20250224175307jOcx",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "条码"
+					},
+					"storeRoomId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 974154372395521,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目ID"
+					},
+					"storeRoomName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "包装材料",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目"
+					},
+					"storeRoomFullName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "包装材料",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目全称"
+					},
+					"manufacturer": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "生产厂商"
+					},
+					"batchNo": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "炉批号"
+					},
+					"storageRoom": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "存放地"
+					},
+					"itemRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"oriMaterialId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料信息varchar主键"
+					},
+					"oriCommonId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料信息其他预留主键sV_Col5"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"taxDeduction": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": true,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否扣税"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2025-02-24T09:53:08.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2025-02-24T09:53:08.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1992048415872512,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"prepointState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "预点状态"
+					},
+					"prepointCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "预点单号"
+					},
+					"diffBookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "调差金额"
+					},
+					"useDiffBookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发调差金额"
+					},
+					"colVarchar50No01": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串50-01"
+					},
+					"colVarchar50No02": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串50-02"
+					},
+					"colVarchar500No01": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-01"
+					},
+					"colVarchar500No02": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-02"
+					},
+					"colVarchar500No03": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-03"
+					},
+					"colVarchar500No04": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-04"
+					},
+					"colVarchar2000No01": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-01"
+					},
+					"colVarchar2000No02": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-02"
+					},
+					"colVarchar2000No03": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-03"
+					},
+					"colVarchar2000No04": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-04"
+					},
+					"colVarcharMaxNo01": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串max-03"
+					},
+					"colVarcharMaxNo02": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串max-04"
+					},
+					"colInt11No01": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-01"
+					},
+					"colInt11No02": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-02"
+					},
+					"colInt11No03": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-03"
+					},
+					"colInt11No04": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-04"
+					},
+					"colInt11No05": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-05"
+					},
+					"colBigint20No01": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整型-主键类-01"
+					},
+					"colBigint20No02": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整型-主键类-02"
+					},
+					"colTinyint1No01": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-01"
+					},
+					"colTinyint1No02": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-02"
+					},
+					"colTinyint1No03": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-03"
+					},
+					"colTinyint1No04": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-04"
+					},
+					"colDecimal4No01": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-4-01"
+					},
+					"colDecimal4No02": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-4-02"
+					},
+					"colDecimal8No01": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-8-01"
+					},
+					"colDecimal8No02": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-8-02"
+					},
+					"invoiceType": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发票类型"
+					}
+				}
+			},
+			{
+				"name": "mReceiveOrder",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 587089923772928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1806590800015872,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"orgName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "专用测试项目部",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织机构名称"
+					},
+					"orderDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-06",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "签订日期"
+					},
+					"orderCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "收料-20240600001",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "签订日期"
+					},
+					"recordedDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-06-07 17:18:25",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "入账时间"
+					},
+					"supplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": "测试客商20220314",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商名称"
+					},
+					"supplierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1228786283565568,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商Id"
+					},
+					"contractId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1232393506361856,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同名称"
+					},
+					"contractCode": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "3333",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同Code"
+					},
+					"purchaseMethod": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "甲供",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "采购方式"
+					},
+					"settlementMethod": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "往来结算",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "结算方式"
+					},
+					"invoiceNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发票号"
+					},
+					"taxDeduction": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": true,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否扣税"
+					},
+					"totalAmount": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 1000,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合计金额"
+					},
+					"orderDataId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "预点单ID 冲预点的时候会存值"
+					},
+					"orderDataCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "预点单号"
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"maker": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "x",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单人"
+					},
+					"makerDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2024-06-07 17:18:37",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单时间"
+					},
+					"isAudit": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "审核状态"
+					},
+					"auditor": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "x",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "审核人"
+					},
+					"auditDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2025-02-24 17:49:07",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "审核时间"
+					},
+					"oriSupplierId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商对接"
+					},
+					"oriOrgId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "机构对接"
+					},
+					"oriOrderId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对接收料单ID"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1213988792489472,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "x",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1213988792489472,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "x",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"serviceType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 10,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"orderType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 4,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRefund": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRush": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"isSummary": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"taxIncludedSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合计含税金额"
+					},
+					"taxFreeSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合计不含税金额"
+					},
+					"orderNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "20240600001",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"purchaseMethodFullName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"printTimes": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "打印次数"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-06-07T09:18:39.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2025-02-24T09:49:12.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1992046483895808,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"isPushed": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否给财务推送"
+					},
+					"pushedNum": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "推送次数"
+					},
+					"errMsg": {
+						"type": null,
+						"rawType": "TEXT",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "推送错误信息"
+					},
+					"isReceive": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": true,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否合同点收"
+					},
+					"isInvoicePretest": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": true,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "仅无发票预点"
+					},
+					"taxRate": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "税率"
+					},
+					"isTurn": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否转正常点收 未转0 转1"
+					},
+					"contType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否合同预点"
+					},
+					"sourceType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "来源类型"
+					},
+					"refundState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "退货状态"
+					},
+					"rushState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "冲红状态"
+					},
+					"approvedState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否审批通过1 驳回2 初始0"
+					},
+					"recordSource": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "587089923772928",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账来源"
+					},
+					"rushPointState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "冲预点状态 未冲0 部分已冲1 全部已冲2"
+					},
+					"contractName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "33333",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同名称"
+					},
+					"contractExecuteRate": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同执行比例"
+					},
+					"supplyModes": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应模式全称"
+					},
+					"supplyModesFullName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应模式全称"
+					},
+					"orderRecordSourceId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账来源id"
+					},
+					"orderRecordSourceName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账来源名称"
+					},
+					"orderStoreRoomName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目名称"
+					},
+					"orderStoreRoomFullName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目全称"
+					},
+					"orderStoreRoomId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目id"
+					},
+					"orderRealitySupplierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供料单位id"
+					},
+					"orderRealitySupplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应单位"
+					},
+					"colVarchar50No01": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串50-01"
+					},
+					"colVarchar50No02": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串50-02"
+					},
+					"colVarchar500No01": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-01"
+					},
+					"colVarchar500No02": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-02"
+					},
+					"colVarchar500No03": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-03"
+					},
+					"colVarchar500No04": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-04"
+					},
+					"colVarchar2000No01": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-01"
+					},
+					"colVarchar2000No02": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-02"
+					},
+					"colVarchar2000No03": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-03"
+					},
+					"colVarchar2000No04": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-04"
+					},
+					"colVarcharMaxNo01": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串max-03"
+					},
+					"colVarcharMaxNo02": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串max-04"
+					},
+					"colInt11No01": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-01"
+					},
+					"colInt11No02": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-02"
+					},
+					"colInt11No03": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-03"
+					},
+					"colInt11No04": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-04"
+					},
+					"colInt11No05": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-05"
+					},
+					"colBigint20No01": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整型-主键类-01"
+					},
+					"colBigint20No02": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整型-主键类-02"
+					},
+					"colTinyint1No01": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-01"
+					},
+					"colTinyint1No02": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-02"
+					},
+					"colTinyint1No03": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-03"
+					},
+					"colTinyint1No04": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-04"
+					},
+					"colDecimal4No01": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-4-01"
+					},
+					"colDecimal4No02": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-4-02"
+					},
+					"colDecimal8No01": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-8-01"
+					},
+					"colDecimal8No02": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-8-02"
+					},
+					"isCommon": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "普通模式数据标记"
+					},
+					"invoiceType": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "发票类型"
+					},
+					"detailPushState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "详情推送状态"
+					}
+				}
+			},
+			{
+				"name": "mReceiveOrderItem",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 587089923772928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1806590800204288,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"orderId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1806590800015872,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主表主键"
+					},
+					"itemDataType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "选材来源"
+					},
+					"itemDataId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1806590621176320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "来源ID"
+					},
+					"materialId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1032193259960320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "主材主键"
+					},
+					"materialCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料编码"
+					},
+					"materialName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "直流电动警报器",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料名称"
+					},
+					"materialModel": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "XJ124/60",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "规格型号"
+					},
+					"materialUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "台",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "主单位"
+					},
+					"quantity": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 100,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "数量"
+					},
+					"taxRate": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 13,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "税率"
+					},
+					"taxFreePrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": 10,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "不含税单价"
+					},
+					"taxFreeSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 1000,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "不含税金额"
+					},
+					"taxIncludedPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": 11.3,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "含税单价"
+					},
+					"taxIncludedSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 1130,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "含税金额"
+					},
+					"taxAmount": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 130,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "税额"
+					},
+					"bookPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": 10,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "账面价"
+					},
+					"bookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 1000,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "账面金额"
+					},
+					"difference": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "差额"
+					},
+					"itemBarCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "WZ20240607171838wp8c",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "条码"
+					},
+					"storeRoomId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 974154372395521,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目ID"
+					},
+					"storeRoomName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "包装材料",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目"
+					},
+					"storeRoomFullName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "包装材料",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "成本科目全称"
+					},
+					"manufacturer": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "生产厂商"
+					},
+					"batchNo": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "炉批号"
+					},
+					"storageRoom": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "存放地"
+					},
+					"itemRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"oriMaterialId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料信息varchar主键"
+					},
+					"oriCommonId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料信息其他预留主键sV_Col5"
+					},
+					"oriItemId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "上传之前的主键"
+					},
+					"oriOrderId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "上传之前的order主键"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1213988792489472,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "x",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1213988792489472,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "x",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"sortCode": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"serviceType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 10,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"orderType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 4,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRefund": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRush": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "状态（普通模式下冲红或冲预点状态标记）1(冲红) 2(冲预点)"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-06-07T09:18:39.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2025-02-24T09:49:12.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1992046483707392,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"qBarCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实物原始条码"
+					},
+					"checkOrderCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账单单号"
+					},
+					"realitySupplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "测试客商20220314",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应商名称"
+					},
+					"realitySupplierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1228786283565568,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应商id"
+					},
+					"oriRealitySupplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应商名称"
+					},
+					"priceType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "价格类型"
+					},
+					"checkId": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "1806590621176320",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账id"
+					},
+					"orderDataId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "来源单据id"
+					},
+					"orderDataCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "来源单据code"
+					},
+					"refundState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "退货状态"
+					},
+					"rushState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "冲红状态"
+					},
+					"purchaseMethod": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "甲供",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "采购方式"
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "明细备注"
+					},
+					"recordSourceId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 587089923772928,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账来源id"
+					},
+					"recordSourceName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "专用测试项目部",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账来源名称"
+					},
+					"returnRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "退货明细备注"
+					},
+					"typeMark": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "类型识别"
+					},
+					"taxDeductionItem": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": true,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否扣税"
+					},
+					"rushPointState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "冲预点状态 未冲0 部分已冲1 全部已冲2"
+					},
+					"rushPointQuantity": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点数量"
+					},
+					"rushTaxFreePrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点不含税单价"
+					},
+					"rushTaxFreeSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点不含税金额"
+					},
+					"rushTaxIncludedPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点含税单价"
+					},
+					"rushTaxIncludedSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点含税金额"
+					},
+					"rushTaxAmount": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点税额"
+					},
+					"rushBookPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点账面价"
+					},
+					"rushBookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点账面金额"
+					},
+					"rushDifference": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "冲预点差额"
+					},
+					"diffTaxFreeSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "调差不含税金额"
+					},
+					"diffTaxIncludedSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "调差含税金额"
+					},
+					"diffBookSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "调差账面金额"
+					},
+					"supplyModes": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应模式"
+					},
+					"colVarchar50No01": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串50-01"
+					},
+					"colVarchar50No02": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串50-02"
+					},
+					"colVarchar500No01": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-01"
+					},
+					"colVarchar500No02": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-02"
+					},
+					"colVarchar500No03": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-03"
+					},
+					"colVarchar500No04": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串500-04"
+					},
+					"colVarchar2000No01": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-01"
+					},
+					"colVarchar2000No02": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-02"
+					},
+					"colVarchar2000No03": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-03"
+					},
+					"colVarchar2000No04": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串2000-04"
+					},
+					"colVarcharMaxNo01": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串max-03"
+					},
+					"colVarcharMaxNo02": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符串max-04"
+					},
+					"colInt11No01": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-01"
+					},
+					"colInt11No02": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-02"
+					},
+					"colInt11No03": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-03"
+					},
+					"colInt11No04": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-04"
+					},
+					"colInt11No05": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整数-05"
+					},
+					"colBigint20No01": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整型-主键类-01"
+					},
+					"colBigint20No02": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "整型-主键类-02"
+					},
+					"colTinyint1No01": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-01"
+					},
+					"colTinyint1No02": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-02"
+					},
+					"colTinyint1No03": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-03"
+					},
+					"colTinyint1No04": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "布尔型-04"
+					},
+					"colDecimal4No01": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-4-01"
+					},
+					"colDecimal4No02": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-4-02"
+					},
+					"colDecimal8No01": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-8-01"
+					},
+					"colDecimal8No02": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "精准数据类型-8-02"
+					}
+				}
+			},
+			{
+				"name": "mReconciliation",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 587089923772928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1170094468583936,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"orgName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "专用测试项目部",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织机构名称"
+					},
+					"recordedDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2021-12-21",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "入账时间"
+					},
+					"orderCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "对账-20211200001",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "单号"
+					},
+					"supplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": "ddddwwww",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商名称"
+					},
+					"supplierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 889211087041024,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商Id"
+					},
+					"oriSupplierId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "供应商对接"
+					},
+					"oriOrgId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对接第三方组织"
+					},
+					"oriOrderId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对接第三方主键"
+					},
+					"accountor": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账人"
+					},
+					"accountTim": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2021-12-21 10:43:22",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对账时间"
+					},
+					"accountState": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "对账状态"
+					},
+					"maker": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "制单人"
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 591107012792320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 591107012792320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"orderDate": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "2021-12",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"entryState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"printTimes": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "打印次数"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2021-12-21T02:43:23.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2021-12-21T02:43:23.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1170094468583936,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"checkWay": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "对账方式"
+					},
+					"contractId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同名称"
+					},
+					"contractCode": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同Code"
+					},
+					"contractName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同名称"
+					},
+					"taxFreeSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 4306.79,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "不含税金额"
+					},
+					"taxIncludedSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 4866.67,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "含税金额"
+					},
+					"taxAmount": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 559.88,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "税额"
+					},
+					"approvedState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否审批通过1 驳回2 初始0"
+					},
+					"signState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "签章状态 已签1 不签2 初始0"
+					},
+					"contractExecuteRate": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同执行比例"
+					},
+					"materialType": {
+						"type": "String",
+						"rawType": "VARCHAR(100)",
+						"allowNull": true,
+						"defaultValue": "",
+						"rawDefaultValue": "",
+						"primaryKey": false,
+						"comment": "材料类型"
+					},
+					"priceType": {
+						"type": "String",
+						"rawType": "VARCHAR(100)",
+						"allowNull": true,
+						"defaultValue": "",
+						"rawDefaultValue": "",
+						"primaryKey": false,
+						"comment": "价格类型"
+					}
+				}
+			},
+			{
+				"name": "mReconciliationItem",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 587089923772928,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "组织机构主键"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1170094468895232,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键id"
+					},
+					"orderId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1170094468583936,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主表主键id"
+					},
+					"orgName": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织机构名称"
+					},
+					"serviceType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 10,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "业务类型 0代表调入（20） 1代表收料（10） 调入退（-21） 收料退（-11）"
+					},
+					"orderType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 4,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "操作类型默认值  1冲红（-1）2补录3退料（去掉）4正常"
+					},
+					"materialId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1032193629042688,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "主材主键"
+					},
+					"materialCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "0006",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料编码"
+					},
+					"materialName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "方钢",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料名称"
+					},
+					"materialModel": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "吨",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "规格型号"
+					},
+					"materialUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "热轧 Q235 18mm",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "单位"
+					},
+					"quantity": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 100,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "数量"
+					},
+					"taxRate": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 13,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "税率"
+					},
+					"taxFreePrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": 22.7139,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "不含税单价"
+					},
+					"taxFreeSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 2271.39,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "不含税金额"
+					},
+					"taxIncludedPrice": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,8)",
+						"allowNull": true,
+						"defaultValue": 25.6667,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "含税单价"
+					},
+					"taxIncludedSum": {
+						"type": "Number",
+						"rawType": "DECIMAL(28,4)",
+						"allowNull": true,
+						"defaultValue": 2566.67,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "含税金额"
+					},
+					"manufacturer": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "生产厂商"
+					},
+					"batchNo": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "炉批号"
+					},
+					"storagePlace": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "存放地"
+					},
+					"infoRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料备注"
+					},
+					"orderBarCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "WZPC1170094468895234",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "条码"
+					},
+					"entryState": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "入账状态"
+					},
+					"itemRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(500)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"oriMaterialId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "对接第三方材料"
+					},
+					"sortCode": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "排序"
+					},
+					"creatorId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 591107012792320,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人主键"
+					},
+					"creatorName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "wff",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "添加人"
+					},
+					"modifierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人主键"
+					},
+					"modifierName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2021-12-21T02:43:23.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2021-12-21T02:43:23.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1170100217074176,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "版本"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"actualSupplierName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "ddddwwww",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应单位名称"
+					},
+					"actualSupplierId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 889211087041024,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应单位id"
+					},
+					"oriActualSupplierId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际供应单位三方id"
+					}
+				}
+			}
+		]
+	},
+	{
+		dbName: 'global_platform',
+		tables:[
+			{
+				"name": "material",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": true,
+						"comment": "来源组织id"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 2286957536802304,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "材料id"
+					},
+					"materialCategoryId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1580584701474304,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料编码"
+					},
+					"code": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": false,
+						"defaultValue": "WL00007",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料编码"
+					},
+					"fullCode": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": false,
+						"defaultValue": "01WL00007",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料fullCode"
+					},
+					"name": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": false,
+						"defaultValue": "aa",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料名称"
+					},
+					"model": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "型号"
+					},
+					"spec": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "aa",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "规格"
+					},
+					"quality": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材质"
+					},
+					"unit": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "千克",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "单位"
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"isExpired": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "停用标记"
+					},
+					"excelCategoryCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "excel导入时使用的材料类别编码"
+					},
+					"excelTaskId": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isApprove": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"approveDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"approver": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"categoryApprove": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"createName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"approveName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"materialCategoryType": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"integrationId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"matchState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"approveState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"approveAdvice": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "审批意见"
+					},
+					"creator": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录创建人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2026-04-17T01:47:16.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录创建时间"
+					},
+					"reviser": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录修改人"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2026-04-17T01:47:16.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 2286957536802304,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录版本号"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"dataPush": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "推送次数"
+					},
+					"createOrigin": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "数据添加来源是常用库还是大库"
+					},
+					"isValid": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "1",
+						"primaryKey": false,
+						"comment": "是否有效"
+					},
+					"colVarchar_50No_01": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符类型扩展字段1"
+					},
+					"colVarchar_50No_02": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字符类型扩展字段2"
+					},
+					"integrationMaterialFactor": {
+						"type": "Number",
+						"rawType": "DECIMAL(18,8)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "关联集成材料的转换系数"
+					},
+					"originalCategoryId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "原始材料类别id"
+					},
+					"usedState": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "数据使用状态"
+					}
+				}
+			},
+			{
+				"name": "materialCategory",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": -1,
+						"rawDefaultValue": "0",
+						"primaryKey": true,
+						"comment": "组织id，0表示租户级别"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1580584701474304,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "材料字典类别id"
+					},
+					"scopeOrgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": -1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "范围id"
+					},
+					"parentId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": -1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "父材料字典类型id"
+					},
+					"fullId": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": false,
+						"defaultValue": "1580584701474304",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型fullId"
+					},
+					"fullIdEx": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": false,
+						"defaultValue": "|1580584701474304|",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型FullId，前后带|"
+					},
+					"name": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": false,
+						"defaultValue": "材料库类别",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型名称"
+					},
+					"fullName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": false,
+						"defaultValue": "材料库类别",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型FullName"
+					},
+					"code": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": false,
+						"defaultValue": "01",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型编码"
+					},
+					"orderNo": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1580584701474304,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型排序"
+					},
+					"level": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "材料字典类型树级别"
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"isDiscaded": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "废弃标记，只保留最新废弃的"
+					},
+					"excelTaskId": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isApprove": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"unit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"integrationId": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"type": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"creator": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录创建人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2023-07-24T01:48:02.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录创建时间"
+					},
+					"reviser": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录修改人"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2023-07-24T01:48:02.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1580584701474304,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标记"
+					},
+					"manageCategory": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "管理分类，A|B|C"
+					},
+					"isLeaf": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否叶子节点"
+					},
+					"isMaterialName": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否控制材料名称"
+					},
+					"dataPush": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "推送次数"
+					},
+					"isExpired": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否作废"
+					}
+				}
+			},
+			{
+				"name": "orgRelation",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 10001,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"childOrgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 10001,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"relationType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "01",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"shortName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "甘肃路桥建设集团有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"childShortName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "甘肃路桥建设集团有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"childType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "company",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"childExtType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "group",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"topProject": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"childOrderNo": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isWatch": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"zoneId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_1": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_2": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_3": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_4": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_1": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_2": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_3": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_4": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"leader": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"leaderPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"parentType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "company",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"parentExtType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "group",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isFocus": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否是关注项目"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2025-07-28T09:13:54.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": null
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2025-07-28T09:13:54.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": null
+					}
+				}
+			},
+			{
+				"name": "orgRelationData",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 561394432421888,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"relationOrgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 179443329822720,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "与当前组织的数据关联的组织id"
+					},
+					"zoneId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "管理区域id"
+					},
+					"leader": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "分管领导名"
+					},
+					"leaderPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "分管领导电话"
+					},
+					"isWatch": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否重点关注"
+					},
+					"creator": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 10001,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"createdAt": {
+						"type": null,
+						"rawType": "TIMESTAMP",
+						"allowNull": false,
+						"defaultValue": "2019-08-14T02:40:09.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": "记录创建时间"
+					},
+					"reviser": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 10001,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"updatedAt": {
+						"type": null,
+						"rawType": "TIMESTAMP",
+						"allowNull": false,
+						"defaultValue": "2019-08-14T02:41:37.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 754817707487771,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"isFocus": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "是否是关注项目"
+					}
+				}
+			},
+			{
+				"name": "orgUser",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": -1,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"userId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 10001,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"userName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "租户管理员",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2024-01-02T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"positionId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": -1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "岗位id"
+					},
+					"positionName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "岗位名称"
+					},
+					"positionDictId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": -1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "岗位模板id"
+					},
+					"positionDictName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "岗位模板名称"
+					}
+				}
+			},
+			{
+				"name": "organization",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "主键"
+					},
+					"parentId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "父组织ID"
+					},
+					"pmParentId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "上级项目部组织ID"
+					},
+					"fullId": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": false,
+						"defaultValue": "3",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "ID全路径"
+					},
+					"pmFullId": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "pmID全路径"
+					},
+					"name": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "中铁十四局集团第一工程有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "名称"
+					},
+					"fullName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织全路径名称"
+					},
+					"shortName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": false,
+						"defaultValue": "1",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "短名称"
+					},
+					"orgType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "1",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织类型"
+					},
+					"extType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "1",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展类型"
+					},
+					"orderNo": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "顺序号"
+					},
+					"intelliWorksite": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "智慧工地"
+					},
+					"intelliTask": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "任务管理"
+					},
+					"syncCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "同步码"
+					},
+					"relationVersion": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "关系版本号"
+					},
+					"isDisabled": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否禁用"
+					},
+					"isLeaf": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "1",
+						"rawDefaultValue": "1",
+						"primaryKey": false,
+						"comment": "是否禁用"
+					},
+					"deletedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"integrationId": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "集成组织id"
+					},
+					"integrationName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"createdAt": {
+						"type": null,
+						"rawType": "TIMESTAMP",
+						"allowNull": false,
+						"defaultValue": "2019-08-07T09:16:34.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": "记录创建时间"
+					},
+					"updatedAt": {
+						"type": null,
+						"rawType": "TIMESTAMP",
+						"allowNull": false,
+						"defaultValue": "2019-08-07T09:16:34.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 812765550047744,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "版本号"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标志"
+					},
+					"pmOrderNo": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "项目组织下级排序号"
+					},
+					"orgCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "组织编码"
+					}
+				}
+			},
+			{
+				"name": "project",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 115447320523904,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"orgId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 115447320523904,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"name": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": false,
+						"defaultValue": "静庄项目部一分部",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"shortName": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "静庄一分部111111",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"manager": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "曹丽燕",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"managerMobile": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "{crypto}BW1Gm+T5EXJ5zQT5PzlMdg==",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"overview": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": "1、清风吹过，bai一阵阵花雨飘落下来，du山野像铺上了一床zhi彩色的大锦被。\n2、夏日里，清清的小dao河成了孩子们避暑的好去处，你看，他们在水中嬉闹着，一会儿打水仗，一会儿扎猛子摸鱼，玩得十分开心。\n3、满塘的荷花荷叶，远远望去就像碧波上荡着点点五颜六色的帆，煞是好看。\n4、水牛早就躲到了池塘里，整个身子埋在了池水中，只露出一个头在水面上透气。\n6、当花翅膀的麦雀子把乡村每个日子叫甜的时候，把黑土地的渴盼叫成金黄色，叫成起伏不平的波浪形，一个最最撩拨庄稼人的时令，又从镰刀上和红缨鞭上熟落了，又从那些古铜色的胸大肌、肱二头肌和醉意朦胧的微笑上熟落了！<p><br></p>",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructStatus": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "termination",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "铁路工程",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructPurpose": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"structType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"planStart": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"planEnd": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-21T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"planFinish": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualStart": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"area": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractPrice": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 6737778880,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"address": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "甘肃省庆阳市西峰区",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"longitude": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 107.68358313879492,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"latitude": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 35.7529739841781,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"biddingUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "甘肃省远大路业集团有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"designUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "中国公路工程咨询集团有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "甘肃路桥建设集团有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"superviserUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "甘肃省交通工程建设监理有限公司",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"thumbnail": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"deletedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 42450.21791099999,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractPeriod": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 547,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualPeriod": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 583,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualYearAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualMonthAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualDayAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"province": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "甘肃省",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"planYearAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"planMonthAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"targetMonthAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"targetTotalAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 42450.21791099999,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"wbsAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 69338.97773699906,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgId_1": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgId_2": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgId_3": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgId_4": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_1": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_2": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_3": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgShortName_4": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"targetYearAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualYesterdayAmount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractSignDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractChangePrice": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 77770000,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractSrcPrice": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 6660008880,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isForeignCountry": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"manageType": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 892166538940928,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"qualification": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 550075712918016,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"engineeringLength": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 1111,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"spotShiningConstruction": {
+						"type": "String",
+						"rawType": "VARCHAR(16383)",
+						"allowNull": true,
+						"defaultValue": "大锅饭，，，会更好工点会更好和规范化个韩国韩国和和规范化个和规范化个韩国韩国和和",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualFinish": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"ensuringOpeningLiableUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"liableLeader": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"liableLeaderPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"planOpeningDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"actualOpeningDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"openingRemark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_1": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_2": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_3": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"elderOrgOrderNo_4": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"riskLevel": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 563642919301120,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"mainEngineeringQuantity": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": "2222<table style=\"border-collapse: collapse;color: rgba(0, 0, 0, 0.7);border-top: 1px solid #ccc;border-left: 1px solid #ccc; display: table;table-layout: fixed;word-wrap: break-word;margin:10px 0;\" border=\"0\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr style=\"height: 26px;border: 1px solid  #ccc;\"><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td></tr><tr style=\"height: 26px;border: 1px solid  #ccc;\"><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td><td style=\"border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;\">&nbsp;</td></tr></tbody></table><p><br></p>",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"controlEngineeringAndBriefing": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": "3333",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"belongRailwaysBureau": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractType": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 892765673140736,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructionMasterPlan": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"applicationMode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "暂未应用",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"city": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "庆阳市",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "城市"
+					},
+					"closingDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"closedDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2019-11-14T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"provisionalSums": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"thirdPartyInspection": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"bidSection": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "第一标段",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"bidSectionLength": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 777,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"designSpeed": {
+						"type": "Number",
+						"rawType": "INT(11)",
+						"allowNull": true,
+						"defaultValue": 777,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"transportType": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 11111,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"altitudeMin": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 7,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"altitudeMax": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": 7,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"internalRiskLevel": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1111,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"chiefEngineerName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "caoliyan",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"chiefEngineerPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "{crypto}yUPBW+O5wNOu6IMh5JQsiQ==",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"handoverAcceptanceDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-13T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"completedAcceptanceDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-07-20T16:00:00.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructionMethodResume": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": "\n3、满塘的荷花荷叶，远远望去就像碧波上荡着点点五颜六色的帆，煞是好看。\n",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"unitTaskPartitioning": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"progressWorksPlan": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"mainItems": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"spareField": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"line": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"bidSectionBeginEnd": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "标段起讫里程"
+					},
+					"isControlProject": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"editor": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"editorPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"postalAddress": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"postcode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"fax": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"constructionMethod": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "22",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"bidUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"bidDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"projectLeaderName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"projectLeaderPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"bidSectionShort": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"investmentType": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"investmentPrice": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"investmentAfterChangePrice": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"biddingUnitName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"biddingUnitPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"designUnitName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"designUnitPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"superviserUnitName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"superviserUnitPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"surveyUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractManager": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"contractChiefEngineer": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"qualityAssessment": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"openingReason": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"secondConstructType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"field01": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展1"
+					},
+					"field02": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展2"
+					},
+					"field03": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展3"
+					},
+					"field04": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展4"
+					},
+					"field05": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展5"
+					},
+					"field06": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展6"
+					},
+					"field07": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展7"
+					},
+					"field08": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展8"
+					},
+					"field09": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展9"
+					},
+					"field10": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展10"
+					},
+					"field11": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展11"
+					},
+					"field12": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展12"
+					},
+					"field13": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展13"
+					},
+					"field14": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展14"
+					},
+					"field15": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展15"
+					},
+					"field16": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展16"
+					},
+					"field17": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展17"
+					},
+					"field18": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展18"
+					},
+					"field19": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展19"
+					},
+					"field20": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展20"
+					},
+					"field21": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展21"
+					},
+					"field22": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展22"
+					},
+					"field23": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展23"
+					},
+					"field24": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展24"
+					},
+					"field25": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展25"
+					},
+					"field26": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展26"
+					},
+					"field27": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展27"
+					},
+					"field28": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展28"
+					},
+					"field29": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展29"
+					},
+					"field30": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展30"
+					},
+					"field31": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展31"
+					},
+					"field32": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展32"
+					},
+					"field33": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展33"
+					},
+					"field34": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展34"
+					},
+					"field35": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展35"
+					},
+					"field36": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展36"
+					},
+					"field37": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展37"
+					},
+					"field38": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展38"
+					},
+					"field39": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展39"
+					},
+					"field40": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展40"
+					},
+					"fieldText01": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展字段36"
+					},
+					"fieldText02": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展字段37"
+					},
+					"fieldText03": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展字段38"
+					},
+					"fieldText04": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展字段39"
+					},
+					"fieldText05": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "扩展字段40"
+					},
+					"createdAt": {
+						"type": null,
+						"rawType": "TIMESTAMP",
+						"allowNull": false,
+						"defaultValue": "2018-05-04T03:56:36.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": "记录创建时间"
+					},
+					"updatedAt": {
+						"type": null,
+						"rawType": "TIMESTAMP",
+						"allowNull": false,
+						"defaultValue": "2022-08-10T07:09:51.000Z",
+						"rawDefaultValue": "CURRENT_TIMESTAMP",
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": true,
+						"defaultValue": 1334432371537920,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": null
+					},
+					"syncCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"participateConstructionUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "参建单位"
+					},
+					"investmentInancingType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "投融资模式"
+					},
+					"superviserUnitIdNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "监理单位项目负责人身份证号"
+					},
+					"superviserUnitPracticeNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "监理单位项目负责人执业证号"
+					},
+					"biddingUnitIdNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "建设单位项目负责人身份证号"
+					},
+					"biddingUnitPracticeNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "建设单位项目负责人执业证号"
+					},
+					"surveyUnitName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "勘察单位联系人"
+					},
+					"surveyUnitPhone": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "勘察单位联系电话"
+					},
+					"surveyUnitIdNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "勘察单位项目负责人身份证号"
+					},
+					"surveyUnitPracticeNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "勘察单位项目负责人执业证号"
+					},
+					"designUnitIdNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "设计单位项目负责人身份证号"
+					},
+					"designUnitPracticeNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "设计单位项目负责人执业证号"
+					},
+					"constructUnitPracticeNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "施工单位项目负责人执业证号"
+					},
+					"handoverDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "交工日期"
+					},
+					"handoverQualityEvaluation": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "交工质量评定"
+					},
+					"completionDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "竣工日期"
+					},
+					"planType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "策划类型"
+					},
+					"planCompletionDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "策划完成时间"
+					},
+					"contractDate": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "合同日期"
+					},
+					"planCompleted": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "计划竣工日期"
+					},
+					"applicationModel": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "应用模式"
+					},
+					"qualifications": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "资质"
+					},
+					"openingReasonStr": {
+						"type": "String",
+						"rawType": "LONGTEXT",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "保开通原因(文本)"
+					},
+					"contractTypeStr": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "承包模式(文本)"
+					},
+					"manageTypeStr": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "管理类型(文本)"
+					},
+					"riskLevelStr": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "风险等级(文本)"
+					},
+					"investmentTypeStr": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "投资类型(文本)"
+					},
+					"constructQuantityUnit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "工程总量-单位"
+					},
+					"constructQuantityCount": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "工程总量-数量"
+					},
+					"taxCalculationMethod": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "计税方法"
+					},
+					"taxRate": {
+						"type": "Number",
+						"rawType": "DOUBLE",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "税率"
+					},
+					"projectCode": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "项目编码"
+					},
+					"integrationId": {
+						"type": "String",
+						"rawType": "VARCHAR(100)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "项目集成id"
+					}
+				}
+			},
+			{
+				"name": "projectAttributeDict",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "id"
+					},
+					"groupName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "项目信息",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "分组名称"
+					},
+					"attrName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "province",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字段 属性名称"
+					},
+					"realName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "所属省份",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "实际名称"
+					},
+					"attrAlias": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "所属省份",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "字段属性别名 中文别名：如合同金额"
+					},
+					"fieldName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "province",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "数据库字段"
+					},
+					"formType": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "combo-box-single",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "表单类型 number、text、textarea、date、contact、combo-box-single,、combo-box-multiple "
+					},
+					"unit": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "单位, 输入框后面的单位 如：万元"
+					},
+					"attrParams": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": "{\"isEnabled\": true}",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "属性参数表 {isSystemDict: true, dictCode ,options:[]}"
+					},
+					"isRequired": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "1",
+						"rawDefaultValue": "1",
+						"primaryKey": false,
+						"comment": "是否必选字段"
+					},
+					"isExtendField": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否扩展字段"
+					},
+					"remark": {
+						"type": "String",
+						"rawType": "VARCHAR(2000)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "备注"
+					},
+					"creator": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录创建人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2020-12-07T07:55:03.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"reviser": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录修改人"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2020-12-07T07:55:03.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 5,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "版本号"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标识"
+					},
+					"placeholder": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "提示语"
+					}
+				}
+			},
+			{
+				"name": "projectAttributeGroupDict",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"id": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "id"
+					},
+					"groupName": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": true,
+						"defaultValue": "基本信息",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "分组名称"
+					},
+					"isSystem": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": true,
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "是否系统"
+					},
+					"creator": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录创建人"
+					},
+					"createdAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2020-12-07T07:55:03.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "创建时间"
+					},
+					"reviser": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "记录修改人"
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": false,
+						"defaultValue": "2020-12-07T07:55:03.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "记录修改时间"
+					},
+					"version": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 1,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": "版本号"
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": false,
+						"defaultValue": "0",
+						"rawDefaultValue": "0",
+						"primaryKey": false,
+						"comment": "删除标识"
+					}
+				}
+			},
+			{
+				"name": "user",
+				"fields": {
+					"tenant": {
+						"type": "String",
+						"rawType": "VARCHAR(50)",
+						"allowNull": false,
+						"defaultValue": "gslq4dev",
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": "租户编码"
+					},
+					"userId": {
+						"type": "Number",
+						"rawType": "BIGINT(20)",
+						"allowNull": false,
+						"defaultValue": 10001,
+						"rawDefaultValue": null,
+						"primaryKey": true,
+						"comment": null
+					},
+					"userName": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": "租户管理员",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"phoneNumber": {
+						"type": "String",
+						"rawType": "VARCHAR(255)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"updatedAt": {
+						"type": "DateTime",
+						"rawType": "DATETIME",
+						"allowNull": true,
+						"defaultValue": "2020-10-15T01:18:49.000Z",
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					},
+					"isRemoved": {
+						"type": "Boolean",
+						"rawType": "TINYINT(1)",
+						"allowNull": true,
+						"defaultValue": null,
+						"rawDefaultValue": null,
+						"primaryKey": false,
+						"comment": null
+					}
+				}
+			}
+		]
+	}
 ]
