@@ -224,14 +224,37 @@
   background-color: var(--el-color-primary-light-9, #ecf5ff);
 }
 
+.entity-structure-item__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.entity-structure-item__checkbox {
+  margin-right: 0;
+
+  .el-checkbox__inner {
+    border-radius: 2px;
+  }
+}
+
 .entity-structure-item__label {
   font-size: 14px;
+  color: var(--el-text-color-primary, #303133);
 }
 
 .entity-structure-item__tag {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--el-text-color-secondary, #909399);
-  margin-left: 8px;
+}
+
+.entity-structure-item__input {
+  width: 80px;
+
+  .el-input__inner {
+    text-align: center;
+  }
 }
 
 /* ==================== 分组4：元数据特性设置 ==================== */

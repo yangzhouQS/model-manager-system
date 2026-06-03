@@ -40,6 +40,10 @@ export interface ModelFormData {
   pageStyle: PageStyle
   /** 实体结构 */
   entityStructure: EntityStructure
+  /** 子实体数量 */
+  childCount: number
+  /** 孙实体数量 */
+  grandchildCount: number
   /** 元数据特性列表 */
   features: MetadataFeature[]
 }
@@ -54,6 +58,8 @@ export function createEmptyModelForm(): ModelFormData {
     namespace: '',
     pageStyle: 'row-edit',
     entityStructure: 'single',
+    childCount: 0,
+    grandchildCount: 0,
     features: [],
   }
 }
@@ -66,12 +72,47 @@ const pageStyleOptions: { value: PageStyle; label: string; image: string }[] = [
   { value: 'tree-card', label: '树卡页面', image: treeCardImg },
 ]
 
+/**
+ * 根据页面样式确定可用的实体结构选项
+ * - 行编辑: 仅 single
+ * - 主从: single, master-child, master-child-grandchild
+ * - 树表/树卡: single, master-child
+ */
+function getAvailableStructures(pageStyle: PageStyle): EntityStructure[] {
+  switch (pageStyle) {
+    case 'row-edit':
+      return ['single']
+    case 'master-detail':
+      return ['single', 'master-child', 'master-child-grandchild']
+    case 'tree-table':
+    case 'tree-card':
+      return ['single', 'master-child']
+    default:
+      return ['single']
+  }
+}
+
 /** 实体结构选项配置 */
-const entityStructureOptions: { value: EntityStructure; label: string; tag: string }[] = [
-  { value: 'single', label: '单主结构元数据', tag: '一主' },
-  { value: 'master-child', label: '主子结构元数据', tag: '一主 子' },
-  { value: 'master-child-grandchild', label: '主子孙结构元数据', tag: '一主 子 孙' },
-]
+const entityStructureConfig: Record<EntityStructure, { label: string; tag: string; showChildInput: boolean; showGrandchildInput: boolean }> = {
+  single: {
+    label: '单主结构元数据',
+    tag: '一主',
+    showChildInput: false,
+    showGrandchildInput: false,
+  },
+  'master-child': {
+    label: '主子结构元数据',
+    tag: '一主',
+    showChildInput: true,
+    showGrandchildInput: false,
+  },
+  'master-child-grandchild': {
+    label: '主子孙结构元数据',
+    tag: '一主',
+    showChildInput: true,
+    showGrandchildInput: true,
+  },
+}
 
 /** 元数据特性选项配置 */
 const featureOptions: { value: MetadataFeature; label: string }[] = [
@@ -112,6 +153,9 @@ const ModelFormDialog = defineComponent({
   setup(props, { emit }) {
     const formModel = reactive<ModelFormData>(createEmptyModelForm())
 
+    /** 当前页面样式下可用的实体结构选项 */
+    const availableStructures = computed(() => getAvailableStructures(formModel.pageStyle))
+
     /** 监听 modelData 变化，同步到内部表单 */
     watch(
       () => props.modelData,
@@ -131,6 +175,37 @@ const ModelFormDialog = defineComponent({
       (visible) => {
         if (!visible) {
           Object.assign(formModel, createEmptyModelForm())
+        }
+      },
+    )
+
+    /** 页面样式切换时，自动修正实体结构选项 */
+    watch(
+      () => formModel.pageStyle,
+      () => {
+        const available = availableStructures.value
+        if (!available.includes(formModel.entityStructure)) {
+          formModel.entityStructure = available[0]
+        }
+        // 重置子/孙数量
+        if (formModel.entityStructure === 'single') {
+          formModel.childCount = 0
+          formModel.grandchildCount = 0
+        } else if (formModel.entityStructure === 'master-child') {
+          formModel.grandchildCount = 0
+        }
+      },
+    )
+
+    /** 实体结构切换时，重置不需要的字段 */
+    watch(
+      () => formModel.entityStructure,
+      (newVal) => {
+        if (newVal === 'single') {
+          formModel.childCount = 0
+          formModel.grandchildCount = 0
+        } else if (newVal === 'master-child') {
+          formModel.grandchildCount = 0
         }
       },
     )
@@ -294,27 +369,69 @@ const ModelFormDialog = defineComponent({
               </div>
             </div>
 
-            {/* 分组3：实体信息设置 */}
+            {/* 分组3：实体信息设置（联动页面样式） */}
             <div class="form-section">
               <div class="form-section__title">实体信息设置</div>
               <div class="form-section__body">
-                <el-radio-group v-model={formModel.entityStructure} class="entity-structure-group">
-                  {entityStructureOptions.map((opt) => (
-                    <div
-                      key={opt.value}
-                      class={[
-                        'entity-structure-item',
-                        formModel.entityStructure === opt.value && 'entity-structure-item--active',
-                      ]}
-                      onClick={() => (formModel.entityStructure = opt.value)}
-                    >
-                      <el-radio value={opt.value}>
-                        <span class="entity-structure-item__label">{opt.label}</span>
-                        <span class="entity-structure-item__tag">【{opt.tag}】</span>
-                      </el-radio>
-                    </div>
-                  ))}
-                </el-radio-group>
+                <div class="entity-structure-group">
+                  {availableStructures.value.map((structKey) => {
+                    const config = entityStructureConfig[structKey]
+                    const isSelected = formModel.entityStructure === structKey
+                    return (
+                      <div
+                        key={structKey}
+                        class={[
+                          'entity-structure-item',
+                          isSelected && 'entity-structure-item--active',
+                        ]}
+                        onClick={() => (formModel.entityStructure = structKey)}
+                      >
+                        <div class="entity-structure-item__content">
+                          <el-checkbox
+                            modelValue={isSelected}
+                            class="entity-structure-item__checkbox"
+                          />
+                          <span class="entity-structure-item__label">{config.label}</span>
+                          <span class="entity-structure-item__tag">{config.tag}</span>
+
+                          {/* 子实体数量输入框 */}
+                          {config.showChildInput && (
+                            <>
+                              <el-input-number
+                                v-model={formModel.childCount}
+                                min={0}
+                                max={99}
+                                size="small"
+                                class="entity-structure-item__input"
+                                disabled={!isSelected}
+                                controls={false}
+                                placeholder="数量"
+                              />
+                              <span class="entity-structure-item__tag">子</span>
+                            </>
+                          )}
+
+                          {/* 孙实体数量输入框 */}
+                          {config.showGrandchildInput && (
+                            <>
+                              <el-input-number
+                                v-model={formModel.grandchildCount}
+                                min={0}
+                                max={99}
+                                size="small"
+                                class="entity-structure-item__input"
+                                disabled={!isSelected}
+                                controls={false}
+                                placeholder="数量"
+                              />
+                              <span class="entity-structure-item__tag">孙</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
             </div>
 

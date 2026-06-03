@@ -14,6 +14,8 @@ interface ModelItem {
   namespace: string
   pageStyle: string
   entityStructure: string
+  childCount: number
+  grandchildCount: number
   features: string[]
   createTime: string
   updateTime: string
@@ -56,6 +58,8 @@ export default defineComponent({
         namespace: 'nsdemo',
         pageStyle: 'row-edit',
         entityStructure: 'single',
+        childCount: 0,
+        grandchildCount: 0,
         features: [],
         createTime: '2026-01-01 00:00:00',
         updateTime: '2026-01-01 00:00:00',
@@ -68,6 +72,8 @@ export default defineComponent({
         namespace: 'system',
         pageStyle: 'master-detail',
         entityStructure: 'master-child',
+        childCount: 3,
+        grandchildCount: 0,
         features: ['approval'],
         createTime: '2026-02-01 00:00:00',
         updateTime: '2026-02-01 00:00:00',
@@ -79,7 +85,9 @@ export default defineComponent({
         module: '业务管理',
         namespace: 'business',
         pageStyle: 'tree-table',
-        entityStructure: 'master-child-grandchild',
+        entityStructure: 'master-child',
+        childCount: 2,
+        grandchildCount: 0,
         features: ['document', 'business-flow'],
         createTime: '2026-03-01 00:00:00',
         updateTime: '2026-03-01 00:00:00',
@@ -120,6 +128,8 @@ export default defineComponent({
         namespace: row.namespace,
         pageStyle: row.pageStyle as ModelFormData['pageStyle'],
         entityStructure: row.entityStructure as ModelFormData['entityStructure'],
+        childCount: row.childCount,
+        grandchildCount: row.grandchildCount,
         features: [...row.features] as ModelFormData['features'],
       }
       dialogVisible.value = true
@@ -155,6 +165,8 @@ export default defineComponent({
             namespace: formData.namespace,
             pageStyle: formData.pageStyle,
             entityStructure: formData.entityStructure,
+            childCount: formData.childCount,
+            grandchildCount: formData.grandchildCount,
             features: [...formData.features],
             updateTime: new Date().toLocaleString(),
           }
@@ -170,6 +182,8 @@ export default defineComponent({
           namespace: formData.namespace,
           pageStyle: formData.pageStyle,
           entityStructure: formData.entityStructure,
+          childCount: formData.childCount,
+          grandchildCount: formData.grandchildCount,
           features: [...formData.features],
           createTime: new Date().toLocaleString(),
           updateTime: new Date().toLocaleString(),
