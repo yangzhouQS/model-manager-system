@@ -288,14 +288,6 @@ const ModelFormDialog = defineComponent({
                   <span class="preview-attr__label">名称空间：</span>
                   <span class="preview-attr__value">{formModel.namespace || 'nsdemo'}</span>
                 </div>
-                <div class="preview-attr">
-                  <span class="preview-attr__label">层级：</span>
-                  <span class="preview-attr__value">领域级(0)</span>
-                </div>
-                <div class="preview-attr">
-                  <span class="preview-attr__label">行业：</span>
-                  <span class="preview-attr__value">综合控股集团(0)</span>
-                </div>
               </div>
             </div>
           </div>
