@@ -224,3 +224,31 @@
   align-items: center;
   justify-content: center;
 }
+
+/* ==================== 关联关系配置卡片 ==================== */
+.relation-config-card {
+  border-radius: 8px;
+
+  .el-card__header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--el-border-color-extra-light, #f0f0f0);
+  }
+
+  .el-card__body {
+    padding: 12px 16px;
+  }
+}
+
+.relation-config-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--el-text-color-regular, #606266);
+
+  .el-icon {
+    color: var(--el-color-primary, #409eff);
+    margin-right: 4px;
+  }
+}

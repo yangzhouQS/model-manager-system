@@ -219,6 +219,17 @@ export default defineComponent({
               }}
             </el-table-column>
 
+            {/* 来源标记 */}
+            <el-table-column label="来源" width={80} align="center">
+              {{
+                default: ({ row }: { row: ModelField }) => (
+                  row.source === 'database'
+                    ? <el-tag type="success" size="small">数据库</el-tag>
+                    : <el-tag type="info" size="small">手动</el-tag>
+                ),
+              }}
+            </el-table-column>
+
             {/* 注释 */}
             <el-table-column label="注释" min-width={120}>
               {{

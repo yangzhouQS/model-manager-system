@@ -2,6 +2,9 @@
  * 模型设计页面 — 类型定义与常量
  */
 
+/** 字段来源类型 */
+export type FieldSource = 'database' | 'manual'
+
 /** 单个模型字段配置 */
 export interface ModelField {
   /** 唯一标识 */
@@ -24,6 +27,10 @@ export interface ModelField {
   allowNull: boolean
   /** 字段注释 */
   comment: string
+  /** 字段来源：database=从数据库导入，manual=手动添加 */
+  source: FieldSource
+  /** 来源数据库原始字段名（仅 database 来源有值） */
+  sourceFieldName: string
 }
 
 /** 实体字段配置（对应一个表/实体） */
@@ -48,8 +55,30 @@ export interface ModelDesignData {
   selectedTableName: string
   /** 各实体的字段配置 */
   entities: EntityFieldConfig[]
+  /** 实体间关联关系 */
+  relations: EntityRelation[]
   /** 更新时间 */
   updateTime: string
+}
+
+/** 关联字段对（等值关联：源字段 = 目标字段） */
+export interface RelationFieldPair {
+  /** 源字段名 */
+  sourceFieldName: string
+  /** 目标字段名 */
+  targetFieldName: string
+}
+
+/** 实体关联关系 */
+export interface EntityRelation {
+  /** 唯一标识 */
+  id: string
+  /** 源实体 key，如 'main' */
+  sourceEntityKey: string
+  /** 目标实体 key，如 'ext_0' */
+  targetEntityKey: string
+  /** 关联字段对列表（支持多个字段对） */
+  fieldPairs: RelationFieldPair[]
 }
 
 /** 数据库信息（从 mock 数据提取） */
@@ -142,7 +171,7 @@ export function generateFieldId(): string {
 }
 
 /**
- * 创建空的 ModelField
+ * 创建空的 ModelField（手动添加）
  */
 export function createEmptyField(): ModelField {
   return {
@@ -156,11 +185,13 @@ export function createEmptyField(): ModelField {
     primaryKey: false,
     allowNull: true,
     comment: '',
+    source: 'manual',
+    sourceFieldName: '',
   }
 }
 
 /**
- * 从 RawTableField 转换为 ModelField
+ * 从 RawTableField 转换为 ModelField（数据库导入）
  */
 export function rawFieldToModelField(raw: RawTableField): ModelField {
   return {
@@ -174,6 +205,8 @@ export function rawFieldToModelField(raw: RawTableField): ModelField {
     primaryKey: raw.primaryKey,
     allowNull: raw.allowNull,
     comment: raw.comment,
+    source: 'database',
+    sourceFieldName: raw.name,
   }
 }
 

@@ -14,10 +14,11 @@ import { ElMessage } from 'element-plus'
 import { getModels } from '../model-manager/storage'
 import { getModelDesign, saveModelDesign } from '../model-manager/storage'
 import type { StoredModel } from '../model-manager/storage'
-import type { ModelField, EntityFieldConfig, ModelDesignData } from './types'
+import type { ModelField, EntityFieldConfig, ModelDesignData, EntityRelation } from './types'
 import { getEntityConfigs } from './types'
 import DataSourceSelector from './DataSourceSelector'
 import FieldConfigTable from './FieldConfigTable'
+import EntityRelationConfig from './EntityRelationConfig'
 import './index.less'
 
 export default defineComponent({
@@ -37,6 +38,7 @@ export default defineComponent({
       selectedDbName: '',
       selectedTableName: '',
       entities: [],
+      relations: [],
       updateTime: '',
     })
 
@@ -116,6 +118,11 @@ export default defineComponent({
       if (designData.entities[entityIndex]) {
         designData.entities[entityIndex].fields = newFields
       }
+    }
+
+    /** 更新关联关系 */
+    function handleUpdateRelations(newRelations: EntityRelation[]) {
+      designData.relations = newRelations
     }
 
     /** 保存设计数据 */
@@ -284,6 +291,32 @@ export default defineComponent({
                 ),
               }}
             </el-card>
+
+            {/* 实体关联关系配置（仅多实体时显示） */}
+            {entityTabs.value.length > 1 && (
+              <el-card class="relation-config-card" shadow="never">
+                {{
+                  header: () => (
+                    <div class="relation-config-card__header">
+                      <span>
+                        <el-icon><el-icon-link /></el-icon>
+                        实体关联关系
+                      </span>
+                      <el-tag size="small" type="info">
+                        {designData.relations.length} 条关联
+                      </el-tag>
+                    </div>
+                  ),
+                  default: () => (
+                    <EntityRelationConfig
+                      entities={designData.entities}
+                      relations={designData.relations}
+                      onUpdate:relations={handleUpdateRelations}
+                    />
+                  ),
+                }}
+              </el-card>
+            )}
           </div>
         ) : (
           <div class="model-design-empty">
