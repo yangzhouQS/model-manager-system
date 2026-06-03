@@ -5,7 +5,8 @@
  * - 顶部：返回按钮 + 模型标题
  * - 模型基本信息卡片（可折叠）
  * - 数据源选择器（导入字段到当前激活的实体）
- * - 动态字段配置表格（主表 + 横向拓展表）
+ * - 动态字段配置表格（支持 SINGLE / EXTENDED_SINGLE / MASTER_CHILD / MASTER_CHILD_GRANDCHILD）
+ * - 实体关联关系配置（多实体时显示）
  * - 保存按钮（持久化到 localStorage）
  */
 import { defineComponent, onMounted, ref, reactive, computed } from 'vue'
@@ -14,12 +15,27 @@ import { ElMessage } from 'element-plus'
 import { getModels } from '../model-manager/storage'
 import { getModelDesign, saveModelDesign } from '../model-manager/storage'
 import type { StoredModel } from '../model-manager/storage'
-import type { ModelField, EntityFieldConfig, ModelDesignData, EntityRelation } from './types'
+import type { ModelField, EntityFieldConfig, ModelDesignData, EntityRelation, EntityType } from './types'
 import { getEntityConfigs } from './types'
 import DataSourceSelector from './DataSourceSelector'
 import FieldConfigTable from './FieldConfigTable'
 import EntityRelationConfig from './EntityRelationConfig'
 import './index.less'
+
+/** 实体标签页分组类型 */
+interface EntityTabGroup {
+  label: string
+  entityType: EntityType
+  tabs: EntityTabItem[]
+}
+
+/** 实体标签页项 */
+interface EntityTabItem {
+  key: string
+  label: string
+  index: number
+  entityType: EntityType
+}
 
 export default defineComponent({
   name: 'ModelDesignPage',
@@ -46,13 +62,56 @@ export default defineComponent({
     const activeEntityIndex = ref(0)
 
     /** 实体标签页列表 */
-    const entityTabs = computed(() =>
+    const entityTabs = computed<EntityTabItem[]>(() =>
       designData.entities.map((e, i) => ({
         key: e.entityKey,
         label: e.entityName,
         index: i,
+        entityType: e.entityType,
       })),
     )
+
+    /** 实体标签页分组（用于 MASTER_CHILD / MASTER_CHILD_GRANDCHILD 的分组展示） */
+    const entityTabGroups = computed<EntityTabGroup[]>(() => {
+      const structure = modelData.value?.entityStructure || ''
+      // EXTENDED_SINGLE 和 SINGLE 不分组
+      if (structure === 'SINGLE' || structure === 'EXTENDED_SINGLE') {
+        return []
+      }
+
+      const groups: EntityTabGroup[] = []
+      const typeLabels: Record<EntityType, string> = {
+        main: '主表',
+        child: '子表',
+        grandchild: '孙表',
+      }
+
+      // 按 entityType 分组
+      const groupMap = new Map<EntityType, EntityTabItem[]>()
+      for (const tab of entityTabs.value) {
+        const items = groupMap.get(tab.entityType) || []
+        items.push(tab)
+        groupMap.set(tab.entityType, items)
+      }
+
+      // 按顺序输出分组：main → child → grandchild
+      const order: EntityType[] = ['main', 'child', 'grandchild']
+      for (const type of order) {
+        const items = groupMap.get(type)
+        if (items && items.length > 0) {
+          groups.push({
+            label: typeLabels[type],
+            entityType: type,
+            tabs: items,
+          })
+        }
+      }
+
+      return groups
+    })
+
+    /** 是否使用分组标签页展示 */
+    const useGroupedTabs = computed(() => entityTabGroups.value.length > 0)
 
     /** 当前激活的实体 */
     const activeEntity = computed(() =>
@@ -71,11 +130,22 @@ export default defineComponent({
       const saved = getModelDesign(modelId)
       if (saved) {
         Object.assign(designData, saved)
+        // 兼容旧数据：补充 entityType 和 parentEntityKey
+        for (const entity of designData.entities) {
+          if (!entity.entityType) {
+            entity.entityType = 'main'
+          }
+          if (!entity.parentEntityKey) {
+            entity.parentEntityKey = ''
+          }
+        }
       } else {
         // 首次进入：根据模型结构生成实体配置
         designData.entities = getEntityConfigs({
           entityStructure: found.entityStructure,
           extendedTableCount: found.extendedTableCount,
+          childCount: found.childCount || 0,
+          grandchildCount: found.grandchildCount || 0,
         })
       }
     })
@@ -256,8 +326,9 @@ export default defineComponent({
                 ),
                 default: () => (
                   <div class="field-design-card__body">
-                    {/* 多实体标签页（仅 EXTENDED_SINGLE 时显示） */}
-                    {entityTabs.value.length > 1 && (
+                    {/* 多实体标签页 */}
+                    {entityTabs.value.length > 1 && !useGroupedTabs.value && (
+                      /* 平铺标签页（EXTENDED_SINGLE） */
                       <div class="entity-tabs">
                         {entityTabs.value.map((tab) => (
                           <div
@@ -272,6 +343,45 @@ export default defineComponent({
                             <span class="entity-tabs__count">
                               {designData.entities[tab.index]?.fields.length || 0}
                             </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {useGroupedTabs.value && (
+                      /* 分组标签页（MASTER_CHILD / MASTER_CHILD_GRANDCHILD） */
+                      <div class="entity-tabs entity-tabs--grouped">
+                        {entityTabGroups.value.map((group, gIndex) => (
+                          <div key={group.entityType} class="entity-tabs__group">
+                            {/* 组标题 */}
+                            <div class="entity-tabs__group-label">{group.label}</div>
+                            {/* 组内标签 */}
+                            <div class="entity-tabs__group-items">
+                              {group.tabs.map((tab) => (
+                                <div
+                                  key={tab.key}
+                                  class={[
+                                    'entity-tabs__item',
+                                    `entity-tabs__item--${tab.entityType}`,
+                                    { 'entity-tabs__item--active': tab.index === activeEntityIndex.value },
+                                  ]}
+                                  onClick={() => handleTabChange(tab.index)}
+                                >
+                                  {/* 子表/孙表层级圆点 */}
+                                  {tab.entityType !== 'main' && (
+                                    <span class={`entity-tabs__dot entity-tabs__dot--${tab.entityType}`} />
+                                  )}
+                                  <span class="entity-tabs__label">{tab.label}</span>
+                                  <span class="entity-tabs__count">
+                                    {designData.entities[tab.index]?.fields.length || 0}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                            {/* 组间分隔线（非最后一组） */}
+                            {gIndex < entityTabGroups.value.length - 1 && (
+                              <div class="entity-tabs__divider" />
+                            )}
                           </div>
                         ))}
                       </div>

@@ -33,16 +33,23 @@ export interface ModelField {
   sourceFieldName: string
 }
 
+ /** 实体层级类型 */
+export type EntityType = 'main' | 'child' | 'grandchild'
+
 /** 实体字段配置（对应一个表/实体） */
 export interface EntityFieldConfig {
-  /** 实体标识，如 main / ext_0 / ext_1 */
+  /** 实体标识，如 main / ext_0 / child_0 / grandchild_0_0 */
   entityKey: string
-  /** 实体显示名称，如 主表 / 拓展表1 */
+  /** 实体显示名称，如 主表 / 拓展表1 / 子表1 / 孙表1-1 */
   entityName: string
   /** 关联的数据库表名（可选，从数据源导入时填充） */
   sourceTableName: string
   /** 字段列表 */
   fields: ModelField[]
+  /** 实体层级类型 */
+  entityType: EntityType
+  /** 父实体 key（孙表指向子表，如 grandchild_0_0 → child_0） */
+  parentEntityKey: string
 }
 
 /** 模型设计数据（持久化到 localStorage） */
@@ -211,13 +218,28 @@ export function rawFieldToModelField(raw: RawTableField): ModelField {
 }
 
 /**
- * 根据模型数据生成实体配置列表（第一阶段：仅 SINGLE + EXTENDED_SINGLE）
+ * 判断两个 TS 类型是否兼容
+ * 规则：同类型兼容，number→string 兼容，其他不兼容
+ */
+export function areTypesCompatible(type1: string, type2: string): boolean {
+  if (type1 === type2) return true
+  // number → string 兼容（隐式转换）
+  if (type1 === 'number' && type2 === 'string') return true
+  return false
+}
+
+/**
+ * 根据模型数据生成实体配置列表
+ * 支持 4 种实体结构：SINGLE / EXTENDED_SINGLE / MASTER_CHILD / MASTER_CHILD_GRANDCHILD
  */
 export function getEntityConfigs(model: {
   entityStructure: string
   extendedTableCount: number
+  childCount: number
+  grandchildCount: number
 }): EntityFieldConfig[] {
   const entities: EntityFieldConfig[] = []
+  const structure = model.entityStructure
 
   // 始终有主表
   entities.push({
@@ -225,16 +247,56 @@ export function getEntityConfigs(model: {
     entityName: '主表',
     sourceTableName: '',
     fields: [],
+    entityType: 'main',
+    parentEntityKey: '',
   })
 
-  if (model.entityStructure === 'EXTENDED_SINGLE') {
+  if (structure === 'EXTENDED_SINGLE') {
     for (let i = 0; i < model.extendedTableCount; i++) {
       entities.push({
         entityKey: `ext_${i}`,
         entityName: `拓展表${i + 1}`,
         sourceTableName: '',
         fields: [],
+        entityType: 'main',
+        parentEntityKey: '',
       })
+    }
+  } else if (structure === 'MASTER_CHILD') {
+    for (let i = 0; i < model.childCount; i++) {
+      entities.push({
+        entityKey: `child_${i}`,
+        entityName: `子表${i + 1}`,
+        sourceTableName: '',
+        fields: [],
+        entityType: 'child',
+        parentEntityKey: 'main',
+      })
+    }
+  } else if (structure === 'MASTER_CHILD_GRANDCHILD') {
+    // 子表
+    for (let i = 0; i < model.childCount; i++) {
+      entities.push({
+        entityKey: `child_${i}`,
+        entityName: `子表${i + 1}`,
+        sourceTableName: '',
+        fields: [],
+        entityType: 'child',
+        parentEntityKey: 'main',
+      })
+    }
+    // 孙表：每个子表下有 grandchildCount 个孙表
+    for (let ci = 0; ci < model.childCount; ci++) {
+      for (let gi = 0; gi < model.grandchildCount; gi++) {
+        entities.push({
+          entityKey: `grandchild_${ci}_${gi}`,
+          entityName: `孙表${ci + 1}-${gi + 1}`,
+          sourceTableName: '',
+          fields: [],
+          entityType: 'grandchild',
+          parentEntityKey: `child_${ci}`,
+        })
+      }
     }
   }
 

@@ -4,12 +4,14 @@
  * 功能：
  * - 配置实体之间的等值关联关系（字段A = 字段B）
  * - 支持多个关联字段对
- * - 仅在有多个实体时显示（EXTENDED_SINGLE）
+ * - 字段下拉显示 TS 类型
+ * - 选择源字段后自动过滤兼容的目标字段
+ * - 不兼容时显示红色警告
  */
 import { defineComponent, type PropType } from 'vue'
 import { ElMessage } from 'element-plus'
-import type { EntityRelation, RelationFieldPair, EntityFieldConfig } from './types'
-import { generateFieldId } from './types'
+import type { EntityRelation, RelationFieldPair, EntityFieldConfig, ModelField } from './types'
+import { generateFieldId, areTypesCompatible } from './types'
 import './EntityRelationConfig.less'
 
 export default defineComponent({
@@ -62,6 +64,8 @@ export default defineComponent({
     function updateRelationEntity(index: number, key: 'sourceEntityKey' | 'targetEntityKey', value: string) {
       const newRelations = [...props.relations]
       newRelations[index] = { ...newRelations[index], [key]: value }
+      // 切换实体时清空字段对
+      newRelations[index].fieldPairs = [{ sourceFieldName: '', targetFieldName: '' }]
       updateRelations(newRelations)
     }
 
@@ -99,16 +103,51 @@ export default defineComponent({
       updateRelations(newRelations)
     }
 
-    /** 获取实体的字段名列表 */
-    function getFieldNames(entityKey: string): string[] {
+    /** 获取实体的字段列表（含 TS 类型信息） */
+    function getFields(entityKey: string): ModelField[] {
       const entity = props.entities.find((e) => e.entityKey === entityKey)
-      return entity ? entity.fields.map((f) => f.fieldName).filter(Boolean) : []
+      return entity ? entity.fields.filter((f) => f.fieldName) : []
     }
 
-    /** 获取实体显示名称 */
-    function getEntityName(entityKey: string): string {
-      const entity = props.entities.find((e) => e.entityKey === entityKey)
-      return entity?.entityName || entityKey
+    /** 获取源字段选中后，兼容的目标字段列表 */
+    function getCompatibleTargetFields(
+      sourceEntityKey: string,
+      sourceFieldName: string,
+      targetEntityKey: string,
+    ): ModelField[] {
+      const targetFields = getFields(targetEntityKey)
+      if (!sourceFieldName) return targetFields
+
+      // 找到源字段的 TS 类型
+      const sourceFields = getFields(sourceEntityKey)
+      const sourceField = sourceFields.find((f) => f.fieldName === sourceFieldName)
+      if (!sourceField) return targetFields
+
+      // 过滤兼容的目标字段
+      return targetFields.filter((tf) => areTypesCompatible(sourceField.tsType, tf.tsType))
+    }
+
+    /** 检查字段对类型是否兼容 */
+    function isPairCompatible(
+      sourceEntityKey: string,
+      sourceFieldName: string,
+      targetEntityKey: string,
+      targetFieldName: string,
+    ): { compatible: boolean; sourceType: string; targetType: string } {
+      if (!sourceFieldName || !targetFieldName) return { compatible: true, sourceType: '', targetType: '' }
+
+      const sourceFields = getFields(sourceEntityKey)
+      const targetFields = getFields(targetEntityKey)
+      const sourceField = sourceFields.find((f) => f.fieldName === sourceFieldName)
+      const targetField = targetFields.find((f) => f.fieldName === targetFieldName)
+
+      if (!sourceField || !targetField) return { compatible: true, sourceType: '', targetType: '' }
+
+      return {
+        compatible: areTypesCompatible(sourceField.tsType, targetField.tsType),
+        sourceType: sourceField.tsType,
+        targetType: targetField.tsType,
+      }
     }
 
     return () => (
@@ -198,47 +237,83 @@ export default defineComponent({
                     </el-button>
                   </div>
 
-                  {relation.fieldPairs.map((pair, pIndex) => (
-                    <div key={pIndex} class="field-pair">
-                      <el-select
-                        modelValue={pair.sourceFieldName}
-                        onUpdate:modelValue={(val: string) => updateFieldPair(rIndex, pIndex, 'sourceFieldName', val)}
-                        size="small"
-                        class="field-pair__select"
-                        placeholder="源字段"
-                        filterable
+                  {relation.fieldPairs.map((pair, pIndex) => {
+                    const compatibility = isPairCompatible(
+                      relation.sourceEntityKey,
+                      pair.sourceFieldName,
+                      relation.targetEntityKey,
+                      pair.targetFieldName,
+                    )
+
+                    return (
+                      <div
+                        key={pIndex}
+                        class={[
+                          'field-pair',
+                          { 'field-pair--incompatible': !compatibility.compatible },
+                        ]}
                       >
-                        {getFieldNames(relation.sourceEntityKey).map((name) => (
-                          <el-option key={name} label={name} value={name} />
-                        ))}
-                      </el-select>
+                        {/* 源字段选择 */}
+                        <el-select
+                          modelValue={pair.sourceFieldName}
+                          onUpdate:modelValue={(val: string) => updateFieldPair(rIndex, pIndex, 'sourceFieldName', val)}
+                          size="small"
+                          class="field-pair__select"
+                          placeholder="源字段"
+                          filterable
+                        >
+                          {getFields(relation.sourceEntityKey).map((field) => (
+                            <el-option
+                              key={field.fieldName}
+                              label={`${field.fieldName} (${field.tsType})`}
+                              value={field.fieldName}
+                            />
+                          ))}
+                        </el-select>
 
-                      <span class="field-pair__eq">=</span>
+                        <span class="field-pair__eq">=</span>
 
-                      <el-select
-                        modelValue={pair.targetFieldName}
-                        onUpdate:modelValue={(val: string) => updateFieldPair(rIndex, pIndex, 'targetFieldName', val)}
-                        size="small"
-                        class="field-pair__select"
-                        placeholder="目标字段"
-                        filterable
-                      >
-                        {getFieldNames(relation.targetEntityKey).map((name) => (
-                          <el-option key={name} label={name} value={name} />
-                        ))}
-                      </el-select>
+                        {/* 目标字段选择（过滤兼容类型） */}
+                        <el-select
+                          modelValue={pair.targetFieldName}
+                          onUpdate:modelValue={(val: string) => updateFieldPair(rIndex, pIndex, 'targetFieldName', val)}
+                          size="small"
+                          class="field-pair__select"
+                          placeholder="目标字段"
+                          filterable
+                        >
+                          {getCompatibleTargetFields(
+                            relation.sourceEntityKey,
+                            pair.sourceFieldName,
+                            relation.targetEntityKey,
+                          ).map((field) => (
+                            <el-option
+                              key={field.fieldName}
+                              label={`${field.fieldName} (${field.tsType})`}
+                              value={field.fieldName}
+                            />
+                          ))}
+                        </el-select>
 
-                      <el-button
-                        link
-                        type="danger"
-                        size="small"
-                        onClick={() => handleDeleteFieldPair(rIndex, pIndex)}
-                        icon="Delete"
-                        disabled={relation.fieldPairs.length <= 1}
-                        title="删除字段对"
-                      />
-                    </div>
-                  ))}
+                        {/* 类型兼容性提示 */}
+                        {!compatibility.compatible && (
+                          <span class="field-pair__warning">
+                            ⚠️ {compatibility.sourceType} ≠ {compatibility.targetType}
+                          </span>
+                        )}
+
+                        <el-button
+                          link
+                          type="danger"
+                          size="small"
+                          onClick={() => handleDeleteFieldPair(rIndex, pIndex)}
+                          icon="Delete"
+                          disabled={relation.fieldPairs.length <= 1}
+                          title="删除字段对"
+                        />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             ))}

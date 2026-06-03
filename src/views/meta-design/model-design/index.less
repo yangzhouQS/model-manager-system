@@ -164,7 +164,7 @@
   flex-direction: column;
 }
 
-/* ==================== 实体标签页 ==================== */
+/* ==================== 实体标签页（平铺） ==================== */
 .entity-tabs {
   display: flex;
   gap: 0;
@@ -215,6 +215,63 @@
 .entity-tabs__item--active .entity-tabs__count {
   background: var(--el-color-primary-light-9, #ecf5ff);
   color: var(--el-color-primary, #409eff);
+}
+
+/* ==================== 实体标签页（分组模式） ==================== */
+.entity-tabs--grouped {
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 16px 0;
+  border-bottom: 2px solid var(--el-border-color-lighter, #ebeef5);
+}
+
+.entity-tabs__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.entity-tabs__group-label {
+  font-size: 12px;
+  color: var(--el-text-color-secondary, #909399);
+  font-weight: 500;
+  padding: 4px 0 2px;
+  user-select: none;
+}
+
+.entity-tabs__group-items {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.entity-tabs__group-items .entity-tabs__item {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* 分组分隔线 */
+.entity-tabs__divider {
+  height: 1px;
+  background: none;
+  border-top: 1px dashed var(--el-border-color, #e4e7ed);
+  margin: 6px 0;
+}
+
+/* 层级圆点 */
+.entity-tabs__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &--child {
+    background: var(--el-color-success, #67c23a);
+  }
+
+  &--grandchild {
+    background: var(--el-color-primary, #409eff);
+  }
 }
 
 /* ==================== 空状态 ==================== */
