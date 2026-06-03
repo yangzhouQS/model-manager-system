@@ -12,7 +12,7 @@ interface ModelItem {
   displayName: string
   module: string
   namespace: string
-  pageStyle: string
+  modelRelation: string
   entityStructure: string
   childCount: number
   grandchildCount: number
@@ -21,8 +21,8 @@ interface ModelItem {
   updateTime: string
 }
 
-/** 页面样式中文映射 */
-const pageStyleMap: Record<string, string> = {
+/** 模型关系中文映射 */
+const modelRelationMap: Record<string, string> = {
   'row-edit': '行编辑页面',
   'master-detail': '主从页面',
   'tree-table': '树表页面',
@@ -56,7 +56,7 @@ export default defineComponent({
         displayName: '测试名称',
         module: '数据应用基础',
         namespace: 'nsdemo',
-        pageStyle: 'row-edit',
+        modelRelation: 'row-edit',
         entityStructure: 'single',
         childCount: 0,
         grandchildCount: 0,
@@ -70,7 +70,7 @@ export default defineComponent({
         displayName: '用户模型',
         module: '系统管理',
         namespace: 'system',
-        pageStyle: 'master-detail',
+        modelRelation: 'master-detail',
         entityStructure: 'master-child',
         childCount: 3,
         grandchildCount: 0,
@@ -84,7 +84,7 @@ export default defineComponent({
         displayName: '订单模型',
         module: '业务管理',
         namespace: 'business',
-        pageStyle: 'tree-table',
+        modelRelation: 'tree-table',
         entityStructure: 'master-child',
         childCount: 2,
         grandchildCount: 0,
@@ -126,7 +126,7 @@ export default defineComponent({
         displayName: row.displayName,
         module: row.module,
         namespace: row.namespace,
-        pageStyle: row.pageStyle as ModelFormData['pageStyle'],
+        modelRelation: row.modelRelation as ModelFormData['modelRelation'],
         entityStructure: row.entityStructure as ModelFormData['entityStructure'],
         childCount: row.childCount,
         grandchildCount: row.grandchildCount,
@@ -163,7 +163,7 @@ export default defineComponent({
             displayName: formData.displayName,
             module: formData.module,
             namespace: formData.namespace,
-            pageStyle: formData.pageStyle,
+            modelRelation: formData.modelRelation,
             entityStructure: formData.entityStructure,
             childCount: formData.childCount,
             grandchildCount: formData.grandchildCount,
@@ -180,7 +180,7 @@ export default defineComponent({
           displayName: formData.displayName,
           module: formData.module,
           namespace: formData.namespace,
-          pageStyle: formData.pageStyle,
+          modelRelation: formData.modelRelation,
           entityStructure: formData.entityStructure,
           childCount: formData.childCount,
           grandchildCount: formData.grandchildCount,
@@ -243,10 +243,10 @@ export default defineComponent({
                 <el-table-column prop="modelCode" label="模型编码" min-width={140} />
                 <el-table-column prop="module" label="所属模块" min-width={120} />
                 <el-table-column prop="namespace" label="名称空间" min-width={100} />
-                <el-table-column prop="pageStyle" label="页面样式" width={120} align="center">
+                <el-table-column prop="modelRelation" label="模型关系" width={120} align="center">
                   {{
                     default: ({ row }: { row: ModelItem }) => (
-                      <el-tag>{pageStyleMap[row.pageStyle] || row.pageStyle}</el-tag>
+                      <el-tag>{modelRelationMap[row.modelRelation] || row.modelRelation}</el-tag>
                     ),
                   }}
                 </el-table-column>

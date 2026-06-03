@@ -3,14 +3,14 @@ import type { PropType } from 'vue'
 import { ElMessage } from 'element-plus'
 import './ModelFormDialog.less'
 
-// 导入页面样式缩略图
+// 导入模型关系缩略图
 import rowEditImg from '../images/行编辑页面.png'
 import masterDetailImg from '../images/主从页面.png'
 import treeTableImg from '../images/树表页面.png'
 import treeCardImg from '../images/树卡页面.png'
 
-/** 页面样式选项 */
-export type PageStyle = 'row-edit' | 'master-detail' | 'tree-table' | 'tree-card'
+/** 模型关系选项 */
+export type ModelRelation = 'row-edit' | 'master-detail' | 'tree-table' | 'tree-card'
 
 /** 实体结构选项 */
 export type EntityStructure = 'single' | 'master-child' | 'master-child-grandchild'
@@ -36,8 +36,8 @@ export interface ModelFormData {
   module: string
   /** 名称空间 */
   namespace: string
-  /** 页面样式 */
-  pageStyle: PageStyle
+  /** 模型关系 */
+  modelRelation: ModelRelation
   /** 实体结构 */
   entityStructure: EntityStructure
   /** 子实体数量 */
@@ -56,7 +56,7 @@ export function createEmptyModelForm(): ModelFormData {
     displayName: '',
     module: '',
     namespace: '',
-    pageStyle: 'row-edit',
+    modelRelation: 'row-edit',
     entityStructure: 'single',
     childCount: 0,
     grandchildCount: 0,
@@ -64,22 +64,22 @@ export function createEmptyModelForm(): ModelFormData {
   }
 }
 
-/** 页面样式选项配置 */
-const pageStyleOptions: { value: PageStyle; label: string; image: string }[] = [
+/** 模型关系选项配置 */
+const modelRelationOptions: { value: ModelRelation; label: string; image: string }[] = [
   { value: 'row-edit', label: '行编辑页面', image: rowEditImg },
   { value: 'master-detail', label: '主从页面', image: masterDetailImg },
-  // { value: 'tree-table', label: '树表页面', image: treeTableImg },
-  // { value: 'tree-card', label: '树卡页面', image: treeCardImg },
+  { value: 'tree-table', label: '树表页面', image: treeTableImg },
+  { value: 'tree-card', label: '树卡页面', image: treeCardImg },
 ]
 
 /**
- * 根据页面样式确定可用的实体结构选项
+ * 根据模型关系确定可用的实体结构选项
  * - 行编辑: 仅 single
  * - 主从: single, master-child, master-child-grandchild
  * - 树表/树卡: single, master-child
  */
-function getAvailableStructures(pageStyle: PageStyle): EntityStructure[] {
-  switch (pageStyle) {
+function getAvailableStructures(modelRelation: ModelRelation): EntityStructure[] {
+  switch (modelRelation) {
     case 'row-edit':
       return ['single']
     case 'master-detail':
@@ -153,8 +153,8 @@ const ModelFormDialog = defineComponent({
   setup(props, { emit }) {
     const formModel = reactive<ModelFormData>(createEmptyModelForm())
 
-    /** 当前页面样式下可用的实体结构选项 */
-    const availableStructures = computed(() => getAvailableStructures(formModel.pageStyle))
+    /** 当前模型关系下可用的实体结构选项 */
+    const availableStructures = computed(() => getAvailableStructures(formModel.modelRelation))
 
     /** 监听 modelData 变化，同步到内部表单 */
     watch(
@@ -179,9 +179,9 @@ const ModelFormDialog = defineComponent({
       },
     )
 
-    /** 页面样式切换时，自动修正实体结构选项 */
+    /** 模型关系切换时，自动修正实体结构选项 */
     watch(
-      () => formModel.pageStyle,
+      () => formModel.modelRelation,
       () => {
         const available = availableStructures.value
         if (!available.includes(formModel.entityStructure)) {
@@ -335,37 +335,37 @@ const ModelFormDialog = defineComponent({
                   </el-form>
                 </div>
 
-                {/* 分组2：页面样式 */}
+                {/* 分组2：模型关系 */}
                 <div class="form-section">
-                  <div class="form-section__title">页面样式</div>
+                  <div class="form-section__title">模型关系</div>
                   <div class="form-section__body">
-                    <div class="page-style-group">
-                      {pageStyleOptions.map((opt) => (
+                    <div class="model-relation-group">
+                      {modelRelationOptions.map((opt) => (
                         <div
                           key={opt.value}
                           class={[
-                            'page-style-item',
-                            formModel.pageStyle === opt.value && 'page-style-item--active',
+                            'model-relation-item',
+                            formModel.modelRelation === opt.value && 'model-relation-item--active',
                           ]}
-                          onClick={() => (formModel.pageStyle = opt.value)}
+                          onClick={() => (formModel.modelRelation = opt.value)}
                         >
-                          <div class="page-style-item__thumb">
+                          <div class="model-relation-item__thumb">
                             <img
                               src={opt.image}
                               alt={opt.label}
-                              class="page-style-item__image"
+                              class="model-relation-item__image"
                             />
                           </div>
-                          <div class="page-style-item__label">{opt.label}</div>
+                          <div class="model-relation-item__label">{opt.label}</div>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                {/* 分组3：实体信息设置（联动页面样式） */}
+                {/* 分组3：模型信息设置（联动模型关系） */}
                 <div class="form-section">
-                  <div class="form-section__title">实体信息设置</div>
+                  <div class="form-section__title">模型信息设置</div>
                   <div class="form-section__body">
                     <div class="entity-structure-group">
                       {availableStructures.value.map((structKey) => {
