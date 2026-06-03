@@ -1,0 +1,46 @@
+.model-design-page {
+  padding: 4px;
+}
+
+.model-design-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.model-design-header__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--el-text-color-primary, #303133);
+}
+
+.model-design-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 模型基本信息卡片 */
+.model-info-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-info-card__toggle-icon {
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+.model-info-card__content {
+  overflow: hidden;
+  max-height: 500px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.model-info-card__content--collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}

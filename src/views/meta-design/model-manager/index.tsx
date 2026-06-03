@@ -1,4 +1,5 @@
 import { defineComponent, ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import ModelFormDialog from './ModelFormDialog'
 import type { ModelFormData } from './ModelFormDialog'
@@ -32,6 +33,7 @@ const statusMap: Record<string, { label: string; type: string }> = {
 export default defineComponent({
   name: 'ModelManagerPage',
   setup() {
+    const router = useRouter()
     const loading = ref(false)
     const dialogVisible = ref(false)
     const dialogTitle = ref('快速向导')
@@ -106,6 +108,11 @@ export default defineComponent({
         features: [...row.features] as ModelFormData['features'],
       }
       dialogVisible.value = true
+    }
+
+    /** 跳转模型设计页面 */
+    function handleDesign(row: StoredModel) {
+      router.push(`/meta-design/model-design/${row.id}`)
     }
 
     /** 删除 */
@@ -249,12 +256,15 @@ export default defineComponent({
                     ),
                   }}
                 </el-table-column>
-                <el-table-column label="操作" width={180} fixed="right" align="center">
+                <el-table-column label="操作" width={240} fixed="right" align="center">
                   {{
                     default: ({ row }: { row: StoredModel }) => (
                       <div class="action-buttons">
                         <el-button type="primary" link onClick={() => handleEdit(row)}>
                           编辑
+                        </el-button>
+                        <el-button type="warning" link onClick={() => handleDesign(row)}>
+                          设计
                         </el-button>
                         <el-button type="danger" link onClick={() => handleDelete(row)}>
                           删除

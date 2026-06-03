@@ -64,6 +64,15 @@ export const asyncRoutes: AppRouteRecordRaw[] = [
         },
         component: () => import('@/views/meta-design/model-manager'),
       },
+      {
+        path: 'model-design/:id',
+        name: 'ModelDesign',
+        meta: {
+          title: '模型设计',
+          hidden: true,
+        },
+        component: () => import('@/views/meta-design/model-design'),
+      },
     ],
   },
   {
