@@ -8,7 +8,7 @@ import './index.less'
 /** 模型数据项（表格展示用） */
 interface ModelItem {
   id: string
-  name: string
+  modelCode: string
   displayName: string
   module: string
   namespace: string
@@ -45,14 +45,14 @@ export default defineComponent({
     const currentModelData = ref<ModelFormData>(createEmptyModelForm())
 
     const queryParams = reactive({
-      name: '',
+      modelCode: '',
       displayName: '',
     })
 
     const tableData = ref<ModelItem[]>([
       {
         id: '1',
-        name: 'receive_demo',
+        modelCode: 'receive_demo',
         displayName: '测试名称',
         module: '数据应用基础',
         namespace: 'nsdemo',
@@ -66,7 +66,7 @@ export default defineComponent({
       },
       {
         id: '2',
-        name: 'user_model',
+        modelCode: 'user_model',
         displayName: '用户模型',
         module: '系统管理',
         namespace: 'system',
@@ -80,7 +80,7 @@ export default defineComponent({
       },
       {
         id: '3',
-        name: 'order_model',
+        modelCode: 'order_model',
         displayName: '订单模型',
         module: '业务管理',
         namespace: 'business',
@@ -105,7 +105,7 @@ export default defineComponent({
 
     /** 重置 */
     function handleReset() {
-      queryParams.name = ''
+      queryParams.modelCode = ''
       queryParams.displayName = ''
       handleQuery()
     }
@@ -122,7 +122,7 @@ export default defineComponent({
       dialogTitle.value = '快速向导'
       currentModelData.value = {
         id: row.id,
-        name: row.name,
+        modelCode: row.modelCode,
         displayName: row.displayName,
         module: row.module,
         namespace: row.namespace,
@@ -159,7 +159,7 @@ export default defineComponent({
         if (index !== -1) {
           tableData.value[index] = {
             ...tableData.value[index],
-            name: formData.name,
+            modelCode: formData.modelCode,
             displayName: formData.displayName,
             module: formData.module,
             namespace: formData.namespace,
@@ -176,7 +176,7 @@ export default defineComponent({
         // 新增模式：添加新数据
         tableData.value.push({
           id: String(Date.now()),
-          name: formData.name,
+          modelCode: formData.modelCode,
           displayName: formData.displayName,
           module: formData.module,
           namespace: formData.namespace,
@@ -197,10 +197,10 @@ export default defineComponent({
         {/* 搜索区域 */}
         <el-card class="search-card">
           <el-form inline>
-            <el-form-item label="模型名称">
+            <el-form-item label="模型编码">
               <el-input
-                v-model={queryParams.name}
-                placeholder="请输入模型名称"
+                v-model={queryParams.modelCode}
+                placeholder="请输入模型编码"
                 clearable
               />
             </el-form-item>
@@ -240,7 +240,7 @@ export default defineComponent({
                 style={{ width: '100%' }}
               >
                 <el-table-column prop="displayName" label="显示名称" min-width={120} />
-                <el-table-column prop="name" label="模型名称" min-width={140} />
+                <el-table-column prop="modelCode" label="模型编码" min-width={140} />
                 <el-table-column prop="module" label="所属模块" min-width={120} />
                 <el-table-column prop="namespace" label="名称空间" min-width={100} />
                 <el-table-column prop="pageStyle" label="页面样式" width={120} align="center">

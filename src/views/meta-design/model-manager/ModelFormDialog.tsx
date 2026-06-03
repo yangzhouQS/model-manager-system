@@ -28,8 +28,8 @@ export type MetadataFeature =
 /** 模型表单数据 */
 export interface ModelFormData {
   id: string
-  /** 名称 */
-  name: string
+  /** 模型编码 */
+  modelCode: string
   /** 显示名称 */
   displayName: string
   /** 所属模块 */
@@ -52,7 +52,7 @@ export interface ModelFormData {
 export function createEmptyModelForm(): ModelFormData {
   return {
     id: '',
-    name: '',
+    modelCode: '',
     displayName: '',
     module: '',
     namespace: '',
@@ -68,8 +68,8 @@ export function createEmptyModelForm(): ModelFormData {
 const pageStyleOptions: { value: PageStyle; label: string; image: string }[] = [
   { value: 'row-edit', label: '行编辑页面', image: rowEditImg },
   { value: 'master-detail', label: '主从页面', image: masterDetailImg },
-  { value: 'tree-table', label: '树表页面', image: treeTableImg },
-  { value: 'tree-card', label: '树卡页面', image: treeCardImg },
+  // { value: 'tree-table', label: '树表页面', image: treeTableImg },
+  // { value: 'tree-card', label: '树卡页面', image: treeCardImg },
 ]
 
 /**
@@ -222,12 +222,12 @@ const ModelFormDialog = defineComponent({
 
     /** 预览区显示名称 */
     const previewDisplayName = computed(() => formModel.displayName || '测试名称')
-    const previewName = computed(() => formModel.name || 'receive_demo')
+    const previewName = computed(() => formModel.modelCode || 'receive_demo')
 
     /** 表单校验并提交 */
     function handleSubmit() {
-      if (!formModel.name.trim()) {
-        ElMessage.warning('请输入名称')
+      if (!formModel.modelCode.trim()) {
+        ElMessage.warning('请输入模型编码')
         return
       }
       if (!formModel.displayName.trim()) {
@@ -260,198 +260,200 @@ const ModelFormDialog = defineComponent({
         onClose={handleClose}
         class="model-form-dialog"
       >
-        <div class="model-form-layout">
-          {/* ========== 左侧预览区 ========== */}
-          <div class="model-form-layout__preview">
-            {/* 顶部标签栏 */}
-            <div class="preview-tags">
-              <span class="preview-tag preview-tag--draft">未发布</span>
-              <span class="preview-tag preview-tag--bmf">BMF</span>
-            </div>
-
-            {/* 预览卡片 */}
-            <div class="preview-card">
-              <div class="preview-card__icon">
-                <span class="preview-card__icon-text">测</span>
-              </div>
-              <div class="preview-card__title">
-                <span class="preview-card__display-name">{previewDisplayName.value}</span>
-                <span class="preview-card__name">({previewName.value})</span>
-              </div>
-
-              <div class="preview-card__attrs">
-                <div class="preview-attr">
-                  <span class="preview-attr__label">所属模块：</span>
-                  <span class="preview-attr__value">{formModel.module || '数据应用基础'}</span>
-                </div>
-                <div class="preview-attr">
-                  <span class="preview-attr__label">名称空间：</span>
-                  <span class="preview-attr__value">{formModel.namespace || 'nsdemo'}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ========== 右侧表单区 ========== */}
-          <div class="model-form-layout__form">
-            {/* 分组1：基础信息 */}
-            <div class="form-section">
-              <div class="form-section__title">基础信息</div>
-              <el-form label-width="100px" class="form-section__body">
-                <el-form-item label="名称" required>
-                  <el-input
-                    v-model={formModel.name}
-                    placeholder="请输入名称，如 receive_demo"
-                    maxlength={100}
-                  />
-                </el-form-item>
-                <el-form-item label="显示名称" required>
-                  <el-input
-                    v-model={formModel.displayName}
-                    placeholder="请输入显示名称"
-                    maxlength={50}
-                  />
-                </el-form-item>
-                <el-form-item label="所属模块" required>
-                  <el-input
-                    v-model={formModel.module}
-                    placeholder="请输入或选择所属模块"
-                    maxlength={100}
-                  >
-                    {{
-                      suffix: () => <el-icon class="el-input__icon"><span>🔍</span></el-icon>,
-                    }}
-                  </el-input>
-                </el-form-item>
-                <el-form-item label="名称空间" required>
-                  <el-input
-                    v-model={formModel.namespace}
-                    placeholder="请输入名称空间"
-                    maxlength={100}
-                  />
-                </el-form-item>
-              </el-form>
-            </div>
-
-            {/* 分组2：页面样式 */}
-            <div class="form-section">
-              <div class="form-section__title">页面样式</div>
-              <div class="form-section__body">
-                <div class="page-style-group">
-                  {pageStyleOptions.map((opt) => (
-                    <div
-                      key={opt.value}
-                      class={[
-                        'page-style-item',
-                        formModel.pageStyle === opt.value && 'page-style-item--active',
-                      ]}
-                      onClick={() => (formModel.pageStyle = opt.value)}
-                    >
-                      <div class="page-style-item__thumb">
-                        <img
-                          src={opt.image}
-                          alt={opt.label}
-                          class="page-style-item__image"
-                        />
-                      </div>
-                      <div class="page-style-item__label">{opt.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* 分组3：实体信息设置（联动页面样式） */}
-            <div class="form-section">
-              <div class="form-section__title">实体信息设置</div>
-              <div class="form-section__body">
-                <div class="entity-structure-group">
-                  {availableStructures.value.map((structKey) => {
-                    const config = entityStructureConfig[structKey]
-                    const isSelected = formModel.entityStructure === structKey
-                    return (
-                      <div
-                        key={structKey}
-                        class={[
-                          'entity-structure-item',
-                          isSelected && 'entity-structure-item--active',
-                        ]}
-                        onClick={() => (formModel.entityStructure = structKey)}
-                      >
-                        <div class="entity-structure-item__content">
-                          <el-checkbox
-                            modelValue={isSelected}
-                            class="entity-structure-item__checkbox"
-                          />
-                          <span class="entity-structure-item__label">{config.label}</span>
-                          <span class="entity-structure-item__tag">{config.tag}</span>
-
-                          {/* 子实体数量输入框 */}
-                          {config.showChildInput && (
-                            <>
-                              <el-input-number
-                                v-model={formModel.childCount}
-                                min={0}
-                                max={99}
-                                size="small"
-                                class="entity-structure-item__input"
-                                disabled={!isSelected}
-                                controls={false}
-                                placeholder="数量"
-                              />
-                              <span class="entity-structure-item__tag">子</span>
-                            </>
-                          )}
-
-                          {/* 孙实体数量输入框 */}
-                          {config.showGrandchildInput && (
-                            <>
-                              <el-input-number
-                                v-model={formModel.grandchildCount}
-                                min={0}
-                                max={99}
-                                size="small"
-                                class="entity-structure-item__input"
-                                disabled={!isSelected}
-                                controls={false}
-                                placeholder="数量"
-                              />
-                              <span class="entity-structure-item__tag">孙</span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* 分组4：元数据特性设置 */}
-            <div class="form-section">
-              <div class="form-section__title">元数据特性设置</div>
-              <div class="form-section__body">
-                <div class="feature-group">
-                  {featureOptions.map((opt) => (
-                    <div
-                      key={opt.value}
-                      class={[
-                        'feature-item',
-                        formModel.features.includes(opt.value) && 'feature-item--active',
-                      ]}
-                      onClick={() => toggleFeature(opt.value)}
-                    >
-                      {opt.label}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 底部按钮 */}
         {{
+          default: () => (
+            <div class="model-form-layout">
+              {/* ========== 左侧预览区 ========== */}
+              <div class="model-form-layout__preview">
+                {/* 顶部标签栏 */}
+                <div class="preview-tags">
+                  <span class="preview-tag preview-tag--draft">未发布</span>
+                  {/* <span class="preview-tag preview-tag--bmf">BMF</span> */}
+                </div>
+
+                {/* 预览卡片 */}
+                <div class="preview-card">
+                  <div class="preview-card__icon">
+                    <span class="preview-card__icon-text">测</span>
+                  </div>
+                  <div class="preview-card__title">
+                    <span class="preview-card__display-name">{previewDisplayName.value}</span>
+                    <span class="preview-card__name">({previewName.value})</span>
+                  </div>
+
+                  <div class="preview-card__attrs">
+                    <div class="preview-attr">
+                      <span class="preview-attr__label">所属模块：</span>
+                      <span class="preview-attr__value">{formModel.module || '数据应用基础'}</span>
+                    </div>
+                    <div class="preview-attr">
+                      <span class="preview-attr__label">名称空间：</span>
+                      <span class="preview-attr__value">{formModel.namespace || 'nsdemo'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ========== 右侧表单区 ========== */}
+              <div class="model-form-layout__form">
+                {/* 分组1：基础信息 */}
+                <div class="form-section">
+                  <div class="form-section__title">基础信息</div>
+                  <el-form label-width="100px" class="form-section__body">
+                    <el-form-item label="模型编码" required>
+                      <el-input
+                        v-model={formModel.modelCode}
+                        placeholder="请输入模型编码，如 receive_demo"
+                        maxlength={100}
+                      />
+                    </el-form-item>
+                    <el-form-item label="显示名称" required>
+                      <el-input
+                        v-model={formModel.displayName}
+                        placeholder="请输入显示名称"
+                        maxlength={50}
+                      />
+                    </el-form-item>
+                    <el-form-item label="所属模块" required>
+                      <el-input
+                        v-model={formModel.module}
+                        placeholder="请输入或选择所属模块"
+                        maxlength={100}
+                      >
+                        {{
+                          suffix: () => <el-icon class="el-input__icon"><span>🔍</span></el-icon>,
+                        }}
+                      </el-input>
+                    </el-form-item>
+                    <el-form-item label="名称空间" required>
+                      <el-input
+                        v-model={formModel.namespace}
+                        placeholder="请输入名称空间"
+                        maxlength={100}
+                      />
+                    </el-form-item>
+                  </el-form>
+                </div>
+
+                {/* 分组2：页面样式 */}
+                <div class="form-section">
+                  <div class="form-section__title">页面样式</div>
+                  <div class="form-section__body">
+                    <div class="page-style-group">
+                      {pageStyleOptions.map((opt) => (
+                        <div
+                          key={opt.value}
+                          class={[
+                            'page-style-item',
+                            formModel.pageStyle === opt.value && 'page-style-item--active',
+                          ]}
+                          onClick={() => (formModel.pageStyle = opt.value)}
+                        >
+                          <div class="page-style-item__thumb">
+                            <img
+                              src={opt.image}
+                              alt={opt.label}
+                              class="page-style-item__image"
+                            />
+                          </div>
+                          <div class="page-style-item__label">{opt.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 分组3：实体信息设置（联动页面样式） */}
+                <div class="form-section">
+                  <div class="form-section__title">实体信息设置</div>
+                  <div class="form-section__body">
+                    <div class="entity-structure-group">
+                      {availableStructures.value.map((structKey) => {
+                        const config = entityStructureConfig[structKey]
+                        const isSelected = formModel.entityStructure === structKey
+                        return (
+                          <div
+                            key={structKey}
+                            class={[
+                              'entity-structure-item',
+                              isSelected && 'entity-structure-item--active',
+                            ]}
+                            onClick={() => (formModel.entityStructure = structKey)}
+                          >
+                            <div class="entity-structure-item__content">
+                              <el-checkbox
+                                modelValue={isSelected}
+                                class="entity-structure-item__checkbox"
+                              />
+                              <span class="entity-structure-item__label">{config.label}</span>
+                              <span class="entity-structure-item__tag">{config.tag}</span>
+
+                              {/* 子实体数量输入框 */}
+                              {config.showChildInput && (
+                                <>
+                                  <el-input-number
+                                    v-model={formModel.childCount}
+                                    min={0}
+                                    max={99}
+                                    size="small"
+                                    class="entity-structure-item__input"
+                                    disabled={!isSelected}
+                                    controls={false}
+                                    placeholder="数量"
+                                  />
+                                  <span class="entity-structure-item__tag">子</span>
+                                </>
+                              )}
+
+                              {/* 孙实体数量输入框 */}
+                              {config.showGrandchildInput && (
+                                <>
+                                  <el-input-number
+                                    v-model={formModel.grandchildCount}
+                                    min={0}
+                                    max={99}
+                                    size="small"
+                                    class="entity-structure-item__input"
+                                    disabled={!isSelected}
+                                    controls={false}
+                                    placeholder="数量"
+                                  />
+                                  <span class="entity-structure-item__tag">孙</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 分组4：元数据特性设置（暂时隐藏） */}
+                {false && (
+                <div class="form-section">
+                  <div class="form-section__title">元数据特性设置</div>
+                  <div class="form-section__body">
+                    <div class="feature-group">
+                      {featureOptions.map((opt) => (
+                        <div
+                          key={opt.value}
+                          class={[
+                            'feature-item',
+                            formModel.features.includes(opt.value) && 'feature-item--active',
+                          ]}
+                          onClick={() => toggleFeature(opt.value)}
+                        >
+                          {opt.label}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                )}
+              </div>
+            </div>
+          ),
           footer: () => (
             <div class="dialog-footer">
               <el-button onClick={handleClose}>取消</el-button>
