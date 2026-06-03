@@ -1,4 +1,4 @@
-import { defineComponent, reactive, watch, computed } from 'vue'
+import { defineComponent, reactive, watch, computed, ref } from 'vue'
 import type { PropType } from 'vue'
 import { ElMessage } from 'element-plus'
 import './ModelFormDialog.less'
@@ -203,6 +203,19 @@ const ModelFormDialog = defineComponent({
   },
   setup(props, { emit }) {
     const formModel = reactive<ModelFormData>(createEmptyModelForm())
+    const modelCodeError = ref('')
+
+    /** 校验模型编码 */
+    function validateModelCode() {
+      const val = formModel.modelCode
+      if (!val.trim()) {
+        modelCodeError.value = '请输入模型编码'
+      } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(val)) {
+        modelCodeError.value = '由英文、数字和下划线组成，且以英文开头'
+      } else {
+        modelCodeError.value = ''
+      }
+    }
 
     /** 当前模型关系下可用的实体结构选项 */
     const availableStructures = computed(() => getAvailableStructures(formModel.modelRelation))
@@ -226,9 +239,16 @@ const ModelFormDialog = defineComponent({
       (visible) => {
         if (!visible) {
           Object.assign(formModel, createEmptyModelForm())
+          modelCodeError.value = ''
         }
       },
     )
+
+    /** 监听模型编码输入实时校验 */
+    watch(() => formModel.modelCode, validateModelCode)
+
+    /** 监听模型编码输入实时校验 */
+    watch(() => formModel.modelCode, validateModelCode)
 
     /** 模型关系切换时，自动修正实体结构选项 */
     watch(
@@ -288,6 +308,10 @@ const ModelFormDialog = defineComponent({
     function handleSubmit() {
       if (!formModel.modelCode.trim()) {
         ElMessage.warning('请输入模型编码')
+        return
+      }
+      if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(formModel.modelCode)) {
+        ElMessage.warning('模型编码由英文、数字和下划线组成，且以英文开头')
         return
       }
       if (!formModel.displayName.trim()) {
@@ -359,11 +383,12 @@ const ModelFormDialog = defineComponent({
                 <div class="form-section">
                   <div class="form-section__title">基础信息</div>
                   <el-form label-width="100px" class="form-section__body">
-                    <el-form-item label="模型编码" required>
+                    <el-form-item label="模型编码" required error={modelCodeError.value}>
                       <el-input
                         v-model={formModel.modelCode}
                         placeholder="请输入模型编码，如 receive_demo"
                         maxlength={100}
+                        onBlur={validateModelCode}
                       />
                     </el-form-item>
                     <el-form-item label="显示名称" required>
