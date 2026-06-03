@@ -1,7 +1,11 @@
 import type { ModelRelation, EntityStructure, MetadataFeature } from './ModelFormDialog'
+import type { ModelDesignData } from '../model-design/types'
 
 /** localStorage 存储键 */
 export const STORAGE_KEY = 'meta-design:models'
+
+/** 模型设计数据存储键 */
+export const DESIGN_STORAGE_KEY = 'meta-design:model-design'
 
 /** 模型状态 */
 export type ModelStatus = 'draft' | 'published'
@@ -115,5 +119,48 @@ export function deleteModel(id: string): boolean {
   const filtered = models.filter((m) => m.id !== id)
   if (filtered.length === models.length) return false
   saveModels(filtered)
+  return true
+}
+
+// ==================== 模型设计数据 CRUD ====================
+
+/** 从 localStorage 读取所有模型设计数据 */
+function getAllDesigns(): Record<string, ModelDesignData> {
+  try {
+    const raw = localStorage.getItem(DESIGN_STORAGE_KEY)
+    if (!raw) return {}
+    return JSON.parse(raw) as Record<string, ModelDesignData>
+  } catch {
+    return {}
+  }
+}
+
+/** 将所有模型设计数据写入 localStorage */
+function saveAllDesigns(designs: Record<string, ModelDesignData>): void {
+  localStorage.setItem(DESIGN_STORAGE_KEY, JSON.stringify(designs))
+}
+
+/** 获取指定模型的设计数据 */
+export function getModelDesign(modelId: string): ModelDesignData | null {
+  const designs = getAllDesigns()
+  return designs[modelId] ?? null
+}
+
+/** 保存模型设计数据（新增或更新） */
+export function saveModelDesign(data: ModelDesignData): void {
+  const designs = getAllDesigns()
+  designs[data.modelId] = {
+    ...data,
+    updateTime: new Date().toISOString(),
+  }
+  saveAllDesigns(designs)
+}
+
+/** 删除指定模型的设计数据 */
+export function deleteModelDesign(modelId: string): boolean {
+  const designs = getAllDesigns()
+  if (!(modelId in designs)) return false
+  delete designs[modelId]
+  saveAllDesigns(designs)
   return true
 }
