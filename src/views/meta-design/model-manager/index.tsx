@@ -1,26 +1,11 @@
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import ModelFormDialog from './ModelFormDialog'
 import type { ModelFormData } from './ModelFormDialog'
 import { createEmptyModelForm } from './ModelFormDialog'
+import { getModels, addModel, updateModel, deleteModel } from './storage'
+import type { StoredModel } from './storage'
 import './index.less'
-
-/** 模型数据项（表格展示用） */
-interface ModelItem {
-  id: string
-  modelCode: string
-  displayName: string
-  module: string
-  groupName: string
-  modelRelation: string
-  entityStructure: string
-  extendedTableCount: number
-  childCount: number
-  grandchildCount: number
-  features: string[]
-  createTime: string
-  updateTime: string
-}
 
 /** 模型关系中文映射 */
 const modelRelationMap: Record<string, string> = {
@@ -38,6 +23,12 @@ const entityStructureMap: Record<string, string> = {
   MASTER_CHILD_GRANDCHILD: '主子孙',
 }
 
+/** 模型状态中文映射 */
+const statusMap: Record<string, { label: string; type: string }> = {
+  draft: { label: '未发布', type: 'info' },
+  published: { label: '已发布', type: 'success' },
+}
+
 export default defineComponent({
   name: 'ModelManagerPage',
   setup() {
@@ -51,68 +42,44 @@ export default defineComponent({
       displayName: '',
     })
 
-    const tableData = ref<ModelItem[]>([
-      {
-        id: '1',
-        modelCode: 'receive_demo',
-        displayName: '测试名称',
-        module: '入库登记',
-        groupName: '默认分组',
-        modelRelation: 'LIST_EDIT',
-        entityStructure: 'SINGLE',
-        extendedTableCount: 0,
-        childCount: 0,
-        grandchildCount: 0,
-        features: [],
-        createTime: '2026-01-01 00:00:00',
-        updateTime: '2026-01-01 00:00:00',
-      },
-      {
-        id: '2',
-        modelCode: 'user_model',
-        displayName: '用户模型',
-        module: '采购计划',
-        groupName: '计划管理',
-        modelRelation: 'MASTER_DETAIL',
-        entityStructure: 'MASTER_CHILD',
-        extendedTableCount: 0,
-        childCount: 3,
-        grandchildCount: 0,
-        features: ['approval'],
-        createTime: '2026-02-01 00:00:00',
-        updateTime: '2026-02-01 00:00:00',
-      },
-      {
-        id: '3',
-        modelCode: 'order_model',
-        displayName: '订单模型',
-        module: '出库登记',
-        groupName: '现场管理',
-        modelRelation: 'TREE_TABLE',
-        entityStructure: 'MASTER_CHILD',
-        extendedTableCount: 0,
-        childCount: 2,
-        grandchildCount: 0,
-        features: ['document', 'business-flow'],
-        createTime: '2026-03-01 00:00:00',
-        updateTime: '2026-03-01 00:00:00',
-      },
-    ])
+    const tableData = ref<StoredModel[]>([])
 
-    /** 查询 */
+    /** 从 localStorage 加载数据 */
+    function loadData() {
+      loading.value = true
+      try {
+        tableData.value = getModels()
+      } finally {
+        loading.value = false
+      }
+    }
+
+    onMounted(() => {
+      loadData()
+    })
+
+    /** 查询（本地过滤） */
     function handleQuery() {
       loading.value = true
       setTimeout(() => {
+        const all = getModels()
+        const code = queryParams.modelCode.trim().toLowerCase()
+        const name = queryParams.displayName.trim().toLowerCase()
+        tableData.value = all.filter((item) => {
+          if (code && !item.modelCode.toLowerCase().includes(code)) return false
+          if (name && !item.displayName.toLowerCase().includes(name)) return false
+          return true
+        })
         loading.value = false
         ElMessage.success('查询成功')
-      }, 500)
+      }, 300)
     }
 
     /** 重置 */
     function handleReset() {
       queryParams.modelCode = ''
       queryParams.displayName = ''
-      handleQuery()
+      loadData()
     }
 
     /** 新增 */
@@ -123,7 +90,7 @@ export default defineComponent({
     }
 
     /** 编辑 */
-    function handleEdit(row: ModelItem) {
+    function handleEdit(row: StoredModel) {
       dialogTitle.value = '快速向导'
       currentModelData.value = {
         id: row.id,
@@ -131,8 +98,8 @@ export default defineComponent({
         displayName: row.displayName,
         module: row.module,
         groupName: row.groupName,
-        modelRelation: row.modelRelation as ModelFormData['modelRelation'],
-        entityStructure: row.entityStructure as ModelFormData['entityStructure'],
+        modelRelation: row.modelRelation,
+        entityStructure: row.entityStructure,
         extendedTableCount: row.extendedTableCount,
         childCount: row.childCount,
         grandchildCount: row.grandchildCount,
@@ -142,14 +109,15 @@ export default defineComponent({
     }
 
     /** 删除 */
-    function handleDelete(row: ModelItem) {
+    function handleDelete(row: StoredModel) {
       ElMessageBox.confirm(`确认删除模型「${row.displayName}」吗？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
       })
         .then(() => {
-          tableData.value = tableData.value.filter((item) => item.id !== row.id)
+          deleteModel(row.id)
+          loadData()
           ElMessage.success('删除成功')
         })
         .catch(() => {
@@ -161,28 +129,7 @@ export default defineComponent({
     function handleFormSubmit(formData: ModelFormData) {
       if (formData.id) {
         // 编辑模式：更新已有数据
-        const index = tableData.value.findIndex((item) => item.id === formData.id)
-        if (index !== -1) {
-          tableData.value[index] = {
-            ...tableData.value[index],
-            modelCode: formData.modelCode,
-            displayName: formData.displayName,
-            module: formData.module,
-            groupName: formData.groupName,
-            modelRelation: formData.modelRelation,
-            entityStructure: formData.entityStructure,
-            extendedTableCount: formData.extendedTableCount,
-            childCount: formData.childCount,
-            grandchildCount: formData.grandchildCount,
-            features: [...formData.features],
-            updateTime: new Date().toLocaleString(),
-          }
-        }
-        ElMessage.success('编辑成功')
-      } else {
-        // 新增模式：添加新数据
-        tableData.value.push({
-          id: String(Date.now()),
+        updateModel(formData.id, {
           modelCode: formData.modelCode,
           displayName: formData.displayName,
           module: formData.module,
@@ -193,11 +140,33 @@ export default defineComponent({
           childCount: formData.childCount,
           grandchildCount: formData.grandchildCount,
           features: [...formData.features],
-          createTime: new Date().toLocaleString(),
-          updateTime: new Date().toLocaleString(),
+        })
+        ElMessage.success('编辑成功')
+      } else {
+        // 新增模式：添加新数据
+        addModel({
+          modelCode: formData.modelCode,
+          displayName: formData.displayName,
+          module: formData.module,
+          groupName: formData.groupName,
+          modelRelation: formData.modelRelation,
+          entityStructure: formData.entityStructure,
+          extendedTableCount: formData.extendedTableCount,
+          childCount: formData.childCount,
+          grandchildCount: formData.grandchildCount,
+          features: [...formData.features],
         })
         ElMessage.success('新增成功')
       }
+      loadData()
+    }
+
+    /** 格式化时间显示 */
+    function formatTime(iso: string) {
+      if (!iso) return ''
+      const d = new Date(iso)
+      const pad = (n: number) => String(n).padStart(2, '0')
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`
     }
 
     return () => (
@@ -253,22 +222,36 @@ export default defineComponent({
                 <el-table-column prop="groupName" label="分组" min-width={100} />
                 <el-table-column prop="modelRelation" label="模型关系" width={130} align="center">
                   {{
-                    default: ({ row }: { row: ModelItem }) => (
+                    default: ({ row }: { row: StoredModel }) => (
                       <el-tag>{modelRelationMap[row.modelRelation] || row.modelRelation}</el-tag>
                     ),
                   }}
                 </el-table-column>
                 <el-table-column prop="entityStructure" label="实体结构" width={130} align="center">
                   {{
-                    default: ({ row }: { row: ModelItem }) => (
+                    default: ({ row }: { row: StoredModel }) => (
                       <span>{entityStructureMap[row.entityStructure] || row.entityStructure}</span>
                     ),
                   }}
                 </el-table-column>
-                <el-table-column prop="createTime" label="创建时间" width={180} />
+                <el-table-column prop="status" label="状态" width={100} align="center">
+                  {{
+                    default: ({ row }: { row: StoredModel }) => {
+                      const s = statusMap[row.status] || { label: row.status, type: 'info' }
+                      return <el-tag type={s.type as 'info' | 'success'}>{s.label}</el-tag>
+                    },
+                  }}
+                </el-table-column>
+                <el-table-column prop="updateTime" label="更新时间" width={180}>
+                  {{
+                    default: ({ row }: { row: StoredModel }) => (
+                      <span>{formatTime(row.updateTime)}</span>
+                    ),
+                  }}
+                </el-table-column>
                 <el-table-column label="操作" width={180} fixed="right" align="center">
                   {{
-                    default: ({ row }: { row: ModelItem }) => (
+                    default: ({ row }: { row: StoredModel }) => (
                       <div class="action-buttons">
                         <el-button type="primary" link onClick={() => handleEdit(row)}>
                           编辑
@@ -287,7 +270,8 @@ export default defineComponent({
 
         {/* 新增/编辑弹窗（独立组件） */}
         <ModelFormDialog
-          v-model={dialogVisible.value}
+          visible={dialogVisible.value}
+          onUpdate:visible={(val: boolean) => { dialogVisible.value = val }}
           title={dialogTitle.value}
           modelData={currentModelData.value}
           onSubmit={handleFormSubmit}
