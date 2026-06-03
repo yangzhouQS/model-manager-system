@@ -4,16 +4,16 @@ import { ElMessage } from 'element-plus'
 import './ModelFormDialog.less'
 
 // 导入模型关系缩略图
-import rowEditImg from '../images/行编辑页面.png'
+import listEditImg from '../images/行编辑页面.png'
 import masterDetailImg from '../images/主从页面.png'
 import treeTableImg from '../images/树表页面.png'
 import treeCardImg from '../images/树卡页面.png'
 
 /** 模型关系选项 */
-export type ModelRelation = 'row-edit' | 'master-detail' | 'tree-table' | 'tree-card'
+export type ModelRelation = 'LIST_EDIT' | 'MASTER_DETAIL' | 'TREE_TABLE' | 'TREE_CARD'
 
 /** 实体结构选项 */
-export type EntityStructure = 'single' | 'master-child' | 'master-child-grandchild'
+export type EntityStructure = 'SINGLE' | 'EXTENDED_SINGLE' | 'MASTER_CHILD' | 'MASTER_CHILD_GRANDCHILD'
 
 /** 元数据特性选项 */
 export type MetadataFeature =
@@ -34,12 +34,14 @@ export interface ModelFormData {
   displayName: string
   /** 所属模块 */
   module: string
-  /** 名称空间 */
-  namespace: string
+  /** 分组 */
+  groupName: string
   /** 模型关系 */
   modelRelation: ModelRelation
   /** 实体结构 */
   entityStructure: EntityStructure
+  /** 横向拓展单表数量 */
+  extendedTableCount: number
   /** 子实体数量 */
   childCount: number
   /** 孙实体数量 */
@@ -55,60 +57,109 @@ export function createEmptyModelForm(): ModelFormData {
     modelCode: '',
     displayName: '',
     module: '',
-    namespace: '',
-    modelRelation: 'row-edit',
-    entityStructure: 'single',
+    groupName: '默认分组',
+    modelRelation: 'LIST_EDIT',
+    entityStructure: 'SINGLE',
+    extendedTableCount: 0,
     childCount: 0,
     grandchildCount: 0,
     features: [],
   }
 }
 
+/** 所属模块选项 */
+const moduleOptions = [
+  { value: '入库登记', label: '入库登记' },
+  { value: '出库登记', label: '出库登记' },
+  { value: '采购计划', label: '采购计划' },
+  { value: '供应计划', label: '供应计划' },
+  { value: '库存管理模块', label: '库存管理模块' },
+]
+
+/** 分组选项 */
+const groupOptions = [
+  { value: '计划管理', label: '计划管理' },
+  { value: '现场管理', label: '现场管理' },
+  { value: '账务', label: '账务' },
+  { value: '核算', label: '核算' },
+  { value: '默认分组', label: '默认分组' },
+]
+
 /** 模型关系选项配置 */
-const modelRelationOptions: { value: ModelRelation; label: string; image: string }[] = [
-  { value: 'row-edit', label: '行编辑页面', image: rowEditImg },
-  { value: 'master-detail', label: '主从页面', image: masterDetailImg },
-  { value: 'tree-table', label: '树表页面', image: treeTableImg },
-  { value: 'tree-card', label: '树卡页面', image: treeCardImg },
+const modelRelationOptions: { value: ModelRelation; label: string; image: string; description: string }[] = [
+  {
+    value: 'LIST_EDIT',
+    label: '列表视图',
+    image: listEditImg,
+    description: '表格直接行内编辑，多用于基础资料维护',
+  },
+  {
+    value: 'MASTER_DETAIL',
+    label: '主子明细视图',
+    image: masterDetailImg,
+    description: '上方主表单、下方明细表格，适用于订单、入库等单据业务',
+  },
+  {
+    value: 'TREE_TABLE',
+    label: '树形列表视图',
+    image: treeTableImg,
+    description: '左侧分类树，右侧数据列表，按树形维度筛选数据',
+  },
+  {
+    value: 'TREE_CARD',
+    label: '树形卡片视图',
+    image: treeCardImg,
+    description: '左侧树形导航，右侧卡片式表单，多用于档案查看维护',
+  },
 ]
 
 /**
  * 根据模型关系确定可用的实体结构选项
- * - 行编辑: 仅 single
- * - 主从: single, master-child, master-child-grandchild
- * - 树表/树卡: single, master-child
+ * - LIST_EDIT: 标准单表、横向拓展单表
+ * - MASTER_DETAIL: 全四种
+ * - TREE_TABLE / TREE_CARD: 标准单表、横向拓展单表、一主多子
  */
 function getAvailableStructures(modelRelation: ModelRelation): EntityStructure[] {
   switch (modelRelation) {
-    case 'row-edit':
-      return ['single']
-    case 'master-detail':
-      return ['single', 'master-child', 'master-child-grandchild']
-    case 'tree-table':
-    case 'tree-card':
-      return ['single', 'master-child']
+    case 'LIST_EDIT':
+      return ['SINGLE', 'EXTENDED_SINGLE']
+    case 'MASTER_DETAIL':
+      return ['SINGLE', 'EXTENDED_SINGLE', 'MASTER_CHILD', 'MASTER_CHILD_GRANDCHILD']
+    case 'TREE_TABLE':
+    case 'TREE_CARD':
+      return ['SINGLE', 'EXTENDED_SINGLE', 'MASTER_CHILD']
     default:
-      return ['single']
+      return ['SINGLE']
   }
 }
 
 /** 实体结构选项配置 */
-const entityStructureConfig: Record<EntityStructure, { label: string; tag: string; showChildInput: boolean; showGrandchildInput: boolean }> = {
-  single: {
-    label: '单主结构元数据',
-    tag: '一主',
+const entityStructureConfig: Record<EntityStructure, { label: string; tag: string; showExtendedInput: boolean; showChildInput: boolean; showGrandchildInput: boolean }> = {
+  SINGLE: {
+    label: '标准单表',
+    tag: '单表',
+    showExtendedInput: false,
     showChildInput: false,
     showGrandchildInput: false,
   },
-  'master-child': {
-    label: '主子结构元数据',
+  EXTENDED_SINGLE: {
+    label: '横向拓展单表',
+    tag: '拓展',
+    showExtendedInput: true,
+    showChildInput: false,
+    showGrandchildInput: false,
+  },
+  MASTER_CHILD: {
+    label: '一主多子',
     tag: '一主',
+    showExtendedInput: false,
     showChildInput: true,
     showGrandchildInput: false,
   },
-  'master-child-grandchild': {
-    label: '主子孙结构元数据',
+  MASTER_CHILD_GRANDCHILD: {
+    label: '主子孙',
     tag: '一主',
+    showExtendedInput: false,
     showChildInput: true,
     showGrandchildInput: true,
   },
@@ -188,27 +239,31 @@ const ModelFormDialog = defineComponent({
           formModel.entityStructure = available[0]
         }
         // 重置子/孙数量
-        if (formModel.entityStructure === 'single') {
-          formModel.childCount = 0
-          formModel.grandchildCount = 0
-        } else if (formModel.entityStructure === 'master-child') {
-          formModel.grandchildCount = 0
-        }
+        resetChildCounts()
       },
     )
 
     /** 实体结构切换时，重置不需要的字段 */
     watch(
       () => formModel.entityStructure,
-      (newVal) => {
-        if (newVal === 'single') {
-          formModel.childCount = 0
-          formModel.grandchildCount = 0
-        } else if (newVal === 'master-child') {
-          formModel.grandchildCount = 0
-        }
+      () => {
+        resetChildCounts()
       },
     )
+
+    /** 根据当前实体结构重置子/孙数量 */
+    function resetChildCounts() {
+      const config = entityStructureConfig[formModel.entityStructure]
+      if (!config.showExtendedInput) {
+        formModel.extendedTableCount = 0
+      }
+      if (!config.showChildInput) {
+        formModel.childCount = 0
+      }
+      if (!config.showGrandchildInput) {
+        formModel.grandchildCount = 0
+      }
+    }
 
     /** 切换元数据特性 */
     function toggleFeature(feature: MetadataFeature) {
@@ -221,8 +276,13 @@ const ModelFormDialog = defineComponent({
     }
 
     /** 预览区显示名称 */
-    const previewDisplayName = computed(() => formModel.displayName || '测试名称')
-    const previewName = computed(() => formModel.modelCode || 'receive_demo')
+    const previewDisplayName = computed(() => formModel.displayName || '显示名称')
+    const previewName = computed(() => formModel.modelCode || '模型编码')
+
+    /** 当前选中的模型关系选项（用于显示描述） */
+    const currentRelationOption = computed(() =>
+      modelRelationOptions.find((opt) => opt.value === formModel.modelRelation),
+    )
 
     /** 表单校验并提交 */
     function handleSubmit() {
@@ -234,12 +294,12 @@ const ModelFormDialog = defineComponent({
         ElMessage.warning('请输入显示名称')
         return
       }
-      if (!formModel.module.trim()) {
-        ElMessage.warning('请输入所属模块')
+      if (!formModel.module) {
+        ElMessage.warning('请选择所属模块')
         return
       }
-      if (!formModel.namespace.trim()) {
-        ElMessage.warning('请输入名称空间')
+      if (!formModel.groupName.trim()) {
+        ElMessage.warning('请输入分组')
         return
       }
       emit('submit', { ...formModel, features: [...formModel.features] })
@@ -268,7 +328,6 @@ const ModelFormDialog = defineComponent({
                 {/* 顶部标签栏 */}
                 <div class="preview-tags">
                   <span class="preview-tag preview-tag--draft">未发布</span>
-                  {/* <span class="preview-tag preview-tag--bmf">BMF</span> */}
                 </div>
 
                 {/* 预览卡片 */}
@@ -284,11 +343,11 @@ const ModelFormDialog = defineComponent({
                   <div class="preview-card__attrs">
                     <div class="preview-attr">
                       <span class="preview-attr__label">所属模块：</span>
-                      <span class="preview-attr__value">{formModel.module || '数据应用基础'}</span>
+                      <span class="preview-attr__value">{formModel.module || '库存管理模块'}</span>
                     </div>
                     <div class="preview-attr">
-                      <span class="preview-attr__label">名称空间：</span>
-                      <span class="preview-attr__value">{formModel.namespace || 'nsdemo'}</span>
+                      <span class="preview-attr__label">分组：</span>
+                      <span class="preview-attr__value">{formModel.groupName || '默认分组'}</span>
                     </div>
                   </div>
                 </div>
@@ -315,22 +374,26 @@ const ModelFormDialog = defineComponent({
                       />
                     </el-form-item>
                     <el-form-item label="所属模块" required>
-                      <el-input
+                      <el-select
                         v-model={formModel.module}
-                        placeholder="请输入或选择所属模块"
-                        maxlength={100}
+                        placeholder="请选择所属模块"
+                        style={{ width: '100%' }}
                       >
-                        {{
-                          suffix: () => <el-icon class="el-input__icon"><span>🔍</span></el-icon>,
-                        }}
-                      </el-input>
+                        {moduleOptions.map((opt) => (
+                          <el-option key={opt.value} label={opt.label} value={opt.value} />
+                        ))}
+                      </el-select>
                     </el-form-item>
-                    <el-form-item label="名称空间" required>
-                      <el-input
-                        v-model={formModel.namespace}
-                        placeholder="请输入名称空间"
-                        maxlength={100}
-                      />
+                    <el-form-item label="分组" required>
+                      <el-select
+                        v-model={formModel.groupName}
+                        placeholder="请选择分组"
+                        style={{ width: '100%' }}
+                      >
+                        {groupOptions.map((opt) => (
+                          <el-option key={opt.value} label={opt.label} value={opt.value} />
+                        ))}
+                      </el-select>
                     </el-form-item>
                   </el-form>
                 </div>
@@ -360,6 +423,12 @@ const ModelFormDialog = defineComponent({
                         </div>
                       ))}
                     </div>
+                    {/* 场景释义描述 */}
+                    {currentRelationOption.value && (
+                      <div class="model-relation-description">
+                        {currentRelationOption.value.description}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -387,6 +456,23 @@ const ModelFormDialog = defineComponent({
                               />
                               <span class="entity-structure-item__label">{config.label}</span>
                               <span class="entity-structure-item__tag">{config.tag}</span>
+
+                              {/* 横向拓展单表数量输入框 */}
+                              {config.showExtendedInput && (
+                                <>
+                                  <el-input-number
+                                    v-model={formModel.extendedTableCount}
+                                    min={0}
+                                    max={99}
+                                    size="small"
+                                    class="entity-structure-item__input"
+                                    disabled={!isSelected}
+                                    controls={false}
+                                    placeholder="数量"
+                                  />
+                                  <span class="entity-structure-item__tag">表</span>
+                                </>
+                              )}
 
                               {/* 子实体数量输入框 */}
                               {config.showChildInput && (

@@ -11,9 +11,10 @@ interface ModelItem {
   modelCode: string
   displayName: string
   module: string
-  namespace: string
+  groupName: string
   modelRelation: string
   entityStructure: string
+  extendedTableCount: number
   childCount: number
   grandchildCount: number
   features: string[]
@@ -23,17 +24,18 @@ interface ModelItem {
 
 /** 模型关系中文映射 */
 const modelRelationMap: Record<string, string> = {
-  'row-edit': '行编辑页面',
-  'master-detail': '主从页面',
-  'tree-table': '树表页面',
-  'tree-card': '树卡页面',
+  LIST_EDIT: '列表视图',
+  MASTER_DETAIL: '主子明细视图',
+  TREE_TABLE: '树形列表视图',
+  TREE_CARD: '树形卡片视图',
 }
 
 /** 实体结构中文映射 */
 const entityStructureMap: Record<string, string> = {
-  single: '单主结构',
-  'master-child': '主子结构',
-  'master-child-grandchild': '主子孙结构',
+  SINGLE: '标准单表',
+  EXTENDED_SINGLE: '横向拓展单表',
+  MASTER_CHILD: '一主多子',
+  MASTER_CHILD_GRANDCHILD: '主子孙',
 }
 
 export default defineComponent({
@@ -54,10 +56,11 @@ export default defineComponent({
         id: '1',
         modelCode: 'receive_demo',
         displayName: '测试名称',
-        module: '数据应用基础',
-        namespace: 'nsdemo',
-        modelRelation: 'row-edit',
-        entityStructure: 'single',
+        module: '入库登记',
+        groupName: '默认分组',
+        modelRelation: 'LIST_EDIT',
+        entityStructure: 'SINGLE',
+        extendedTableCount: 0,
         childCount: 0,
         grandchildCount: 0,
         features: [],
@@ -68,10 +71,11 @@ export default defineComponent({
         id: '2',
         modelCode: 'user_model',
         displayName: '用户模型',
-        module: '系统管理',
-        namespace: 'system',
-        modelRelation: 'master-detail',
-        entityStructure: 'master-child',
+        module: '采购计划',
+        groupName: '计划管理',
+        modelRelation: 'MASTER_DETAIL',
+        entityStructure: 'MASTER_CHILD',
+        extendedTableCount: 0,
         childCount: 3,
         grandchildCount: 0,
         features: ['approval'],
@@ -82,10 +86,11 @@ export default defineComponent({
         id: '3',
         modelCode: 'order_model',
         displayName: '订单模型',
-        module: '业务管理',
-        namespace: 'business',
-        modelRelation: 'tree-table',
-        entityStructure: 'master-child',
+        module: '出库登记',
+        groupName: '现场管理',
+        modelRelation: 'TREE_TABLE',
+        entityStructure: 'MASTER_CHILD',
+        extendedTableCount: 0,
         childCount: 2,
         grandchildCount: 0,
         features: ['document', 'business-flow'],
@@ -125,9 +130,10 @@ export default defineComponent({
         modelCode: row.modelCode,
         displayName: row.displayName,
         module: row.module,
-        namespace: row.namespace,
+        groupName: row.groupName,
         modelRelation: row.modelRelation as ModelFormData['modelRelation'],
         entityStructure: row.entityStructure as ModelFormData['entityStructure'],
+        extendedTableCount: row.extendedTableCount,
         childCount: row.childCount,
         grandchildCount: row.grandchildCount,
         features: [...row.features] as ModelFormData['features'],
@@ -162,9 +168,10 @@ export default defineComponent({
             modelCode: formData.modelCode,
             displayName: formData.displayName,
             module: formData.module,
-            namespace: formData.namespace,
+            groupName: formData.groupName,
             modelRelation: formData.modelRelation,
             entityStructure: formData.entityStructure,
+            extendedTableCount: formData.extendedTableCount,
             childCount: formData.childCount,
             grandchildCount: formData.grandchildCount,
             features: [...formData.features],
@@ -179,9 +186,10 @@ export default defineComponent({
           modelCode: formData.modelCode,
           displayName: formData.displayName,
           module: formData.module,
-          namespace: formData.namespace,
+          groupName: formData.groupName,
           modelRelation: formData.modelRelation,
           entityStructure: formData.entityStructure,
+          extendedTableCount: formData.extendedTableCount,
           childCount: formData.childCount,
           grandchildCount: formData.grandchildCount,
           features: [...formData.features],
@@ -242,15 +250,15 @@ export default defineComponent({
                 <el-table-column prop="displayName" label="显示名称" min-width={120} />
                 <el-table-column prop="modelCode" label="模型编码" min-width={140} />
                 <el-table-column prop="module" label="所属模块" min-width={120} />
-                <el-table-column prop="namespace" label="名称空间" min-width={100} />
-                <el-table-column prop="modelRelation" label="模型关系" width={120} align="center">
+                <el-table-column prop="groupName" label="分组" min-width={100} />
+                <el-table-column prop="modelRelation" label="模型关系" width={130} align="center">
                   {{
                     default: ({ row }: { row: ModelItem }) => (
                       <el-tag>{modelRelationMap[row.modelRelation] || row.modelRelation}</el-tag>
                     ),
                   }}
                 </el-table-column>
-                <el-table-column prop="entityStructure" label="实体结构" width={120} align="center">
+                <el-table-column prop="entityStructure" label="实体结构" width={130} align="center">
                   {{
                     default: ({ row }: { row: ModelItem }) => (
                       <span>{entityStructureMap[row.entityStructure] || row.entityStructure}</span>
