@@ -99,7 +99,7 @@ const modelRelationOptions: { value: ModelRelation; label: string; image: string
     image: masterDetailImg,
     description: '上方主表单、下方明细表格，适用于订单、入库等单据业务',
   },
-  {
+  /* {
     value: 'TREE_TABLE',
     label: '树形列表视图',
     image: treeTableImg,
@@ -110,7 +110,7 @@ const modelRelationOptions: { value: ModelRelation; label: string; image: string
     label: '树形卡片视图',
     image: treeCardImg,
     description: '左侧树形导航，右侧卡片式表单，多用于档案查看维护',
-  },
+  }, */
 ]
 
 /**
