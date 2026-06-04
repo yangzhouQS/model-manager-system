@@ -12,6 +12,7 @@
 import { defineComponent, onMounted, ref, reactive, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { InfoFilled, ArrowDown, Connection, Grid, Link } from '@element-plus/icons-vue'
 import { getModels } from '../model-manager/storage'
 import { getModelDesign, saveModelDesign } from '../model-manager/storage'
 import type { StoredModel } from '../model-manager/storage'
@@ -250,7 +251,7 @@ export default defineComponent({
                 header: () => (
                   <div class="model-info-card__header" onClick={toggleInfoCollapse}>
                     <span class="model-info-card__header-title">
-                      <el-icon><el-icon-info-filled /></el-icon>
+                      <el-icon><InfoFilled /></el-icon>
                       模型基本信息
                     </span>
                     <el-button
@@ -264,7 +265,7 @@ export default defineComponent({
                         class="model-info-card__toggle-icon"
                         style={{ transform: infoCollapsed.value ? 'rotate(0deg)' : 'rotate(180deg)' }}
                       >
-                        <el-icon-arrow-down />
+                        <ArrowDown />
                       </el-icon>
                     </el-button>
                   </div>
@@ -297,7 +298,7 @@ export default defineComponent({
                 header: () => (
                   <div class="data-source-card__header">
                     <span>
-                      <el-icon><el-icon-connection /></el-icon>
+                      <el-icon><Connection /></el-icon>
                       数据源导入
                       {activeEntity.value && (
                         <el-tag size="small" type="warning" style={{ marginLeft: '8px' }}>
@@ -319,7 +320,7 @@ export default defineComponent({
                 header: () => (
                   <div class="field-design-card__header">
                     <span>
-                      <el-icon><el-icon-grid /></el-icon>
+                      <el-icon><Grid /></el-icon>
                       字段配置
                     </span>
                   </div>
@@ -409,7 +410,7 @@ export default defineComponent({
                   header: () => (
                     <div class="relation-config-card__header">
                       <span>
-                        <el-icon><el-icon-link /></el-icon>
+                        <el-icon><Link /></el-icon>
                         实体关联关系
                       </span>
                       <el-tag size="small" type="info">

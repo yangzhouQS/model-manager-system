@@ -8,6 +8,7 @@
  */
 import { defineComponent, type PropType } from 'vue'
 import { ElMessage } from 'element-plus'
+import { Grid } from '@element-plus/icons-vue'
 import type { ModelField } from './types'
 import { TS_TYPE_OPTIONS, createEmptyField, generateFieldId } from './types'
 import './FieldConfigTable.less'
@@ -94,7 +95,7 @@ export default defineComponent({
       <div class="field-config-table">
         <div class="field-config-table__header">
           <span class="field-config-table__title">
-            <el-icon class="field-config-table__icon"><el-icon-grid /></el-icon>
+            <el-icon class="field-config-table__icon"><Grid /></el-icon>
             {props.entityName} — 字段配置
           </span>
           <div class="field-config-table__actions">

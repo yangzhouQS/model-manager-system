@@ -10,6 +10,7 @@
  */
 import { defineComponent, type PropType } from 'vue'
 import { ElMessage } from 'element-plus'
+import { Link, Right } from '@element-plus/icons-vue'
 import type { EntityRelation, RelationFieldPair, EntityFieldConfig, ModelField } from './types'
 import { generateFieldId, areTypesCompatible } from './types'
 import './EntityRelationConfig.less'
@@ -154,7 +155,7 @@ export default defineComponent({
       <div class="entity-relation-config">
         <div class="entity-relation-config__header">
           <span class="entity-relation-config__title">
-            <el-icon><el-icon-link /></el-icon>
+            <el-icon><Link /></el-icon>
             实体关联关系
           </span>
           <el-button
@@ -206,7 +207,7 @@ export default defineComponent({
                   </el-select>
 
                   <span class="relation-item__arrow">
-                    <el-icon><el-icon-right /></el-icon>
+                    <el-icon><Right /></el-icon>
                   </span>
 
                   <el-select
