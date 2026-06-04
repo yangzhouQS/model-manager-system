@@ -13,13 +13,13 @@ export const router = createRouter({
 })
 
 /** 路由守卫 - 前置 */
-router.beforeEach((to, _from, next) => {
+router.beforeEach((to) => {
   // 设置页面标题
   const title = to.meta?.title
   if (title) {
     document.title = `${title} | Vue3 Admin`
   }
-  next()
+  // 返回 true 或 undefined 表示允许导航（不再使用已弃用的 next() 回调）
 })
 
 /** 路由守卫 - 后置 */
