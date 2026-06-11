@@ -154,6 +154,15 @@ export const asyncRoutes: AppRouteRecordRaw[] = [
         },
         component: () => import('@/views/components/form'),
       },
+      {
+        path: 'popover',
+        name: 'PopoverExample',
+        meta: {
+          title: '气泡弹出框',
+          icon: 'ChatDotRound',
+        },
+        component: () => import('@/views/components/popover'),
+      },
     ],
   },
   {
